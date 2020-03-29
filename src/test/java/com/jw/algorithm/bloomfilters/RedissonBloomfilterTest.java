@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 布隆过滤器是一种概率数据结构：能确认元素不存在于集合中，但只能提供元素出现在集合中的概率
  *
- * @Description:com.jw.algorithm.bloomfilters.RedissonTest
+ * @Description:com.jw.algorithm.bloomfilters.RedissonBloomfilterTest
  * @Author:guoyiyong/james
  * @Date:2019-12-30 14:19
  * @Version:1.0 <p>
@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 @SpringBootTest(classes = GuoyyApplication.class)
 //Spring boot 2.1.x之后，@SpringBootTest @ExtendWith({SpringExtension.class})
-public class RedissonTest {
+public class RedissonBloomfilterTest {
     @Resource
     private RedisConf redisConf;
 

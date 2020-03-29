@@ -1,10 +1,13 @@
 package com.jw.test;
 
 import com.alibaba.fastjson.JSON;
+import com.ning.compress.lzf.LZFDecoder;
+import com.ning.compress.lzf.LZFEncoder;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,6 +37,18 @@ import java.util.stream.IntStream;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class Test1 {
+
+    public static void main(String[] args) throws Exception {
+        String str = "qwertqwertyuioplkjhgfdsaqwertyuioplkjhgfdsayuioplkjhqwertyuioplkjhgfdsaqwertyuioplkjhgfdsagfdsaqwqwertyuioplkjhgfdsaqwertyuqwertyuioplkjhgfdsaqwertyuioplkjhgfdsaioplkjhgfdsaertyuioplkjhgfdsa";
+        System.out.println(str);
+
+        byte[] encode = LZFEncoder.encode(str.getBytes());
+        String s1 = Base64.getEncoder().encodeToString(encode);
+        System.out.println(s1);
+
+        byte[] decode = LZFDecoder.decode(Base64.getDecoder().decode(s1.getBytes()));
+        System.out.println(new String(decode));
+    }
 
     private static final Pattern PATTERN = Pattern.compile("[0]+");
 

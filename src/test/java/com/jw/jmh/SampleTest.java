@@ -36,7 +36,10 @@ public class SampleTest {
     public static void main(String[] args) throws RunnerException {
         Options build = new OptionsBuilder()
                 .include(SampleTest.class.getSimpleName())
-                .forks(1).build();
+                .forks(1)
+                .warmupIterations(5)
+                .measurementIterations(3)
+                .build();
         new Runner(build).run();
     }
 
