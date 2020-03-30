@@ -73,7 +73,7 @@ public class RedisBloomfilterTest {
         RandomStringGenerator build = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
         ThreadLocalRandom random = ThreadLocalRandom.current();
         for (int i = 0; i < 100_000; i++) {
-            objs.add(new Person(i, build.generate(16), random.nextInt(30), (byte)random.nextInt(1), build.generate(11)));
+            objs.add(new Person(i, build.generate(16), random.nextInt(30), (byte) random.nextInt(1), build.generate(11), build.generate(128)));
         }
         for (int i = 0; i < 10_000; i++) {
             boolean succ = redisTemplate.execute(script_add, keys, objs.get(i));

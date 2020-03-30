@@ -33,7 +33,7 @@ public class GuavaBloomfilterTest {
         RandomStringGenerator build = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
         ThreadLocalRandom random = ThreadLocalRandom.current();
         for (int i = 0; i < 100_000; i++) {
-            objs.add(new Person(i, build.generate(16), random.nextInt(30), (byte)random.nextInt(1), build.generate(11)));
+            objs.add(new Person(i, build.generate(16), random.nextInt(30), (byte) random.nextInt(1), build.generate(11), build.generate(11)));
         }
         for (Person obj : objs) {
             boolean succ = filter.put(obj);

@@ -25,4 +25,5 @@ public class Person {
     private int age;
     private byte sex;
     private String phone;
+    private String addr;
 }
