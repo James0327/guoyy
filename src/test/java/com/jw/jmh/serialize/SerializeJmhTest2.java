@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@BenchmarkMode({Mode.Throughput, Mode.AverageTime})
+@BenchmarkMode({Mode.SampleTime, Mode.Throughput, Mode.AverageTime})
 public class SerializeJmhTest2 {
     private final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
 
@@ -52,8 +52,7 @@ public class SerializeJmhTest2 {
                 .include(SerializeJmhTest2.class.getSimpleName())
                 .warmupIterations(3)
                 .measurementIterations(3)
-                .measurementTime(TimeValue.seconds(5))
-                .timeout(TimeValue.seconds(30))
+                .measurementTime(TimeValue.minutes(5))
                 .result("serialize_test_jmh2.json")
                 .resultFormat(ResultFormatType.JSON)
                 .jvmArgs("-ea")
@@ -63,21 +62,21 @@ public class SerializeJmhTest2 {
 
     @Benchmark
     @BenchmarkMode({Mode.SingleShotTime})
-    @Measurement(batchSize = 50000)
+    @Measurement(batchSize = 100_000_000)
     public void jsonSerialize(Blackhole b) {
         b.consume(fastJson.searialize(obj));
     }
 
     @Benchmark
     @BenchmarkMode({Mode.SingleShotTime})
-    @Measurement(batchSize = 50000)
+    @Measurement(batchSize = 100_000_000)
     public void msgPackSerialize(Blackhole b) throws IOException {
         b.consume(msgPack.searialize(obj));
     }
 
     @Benchmark
     @BenchmarkMode({Mode.SingleShotTime})
-    @Measurement(batchSize = 50000)
+    @Measurement(batchSize = 100_000_000)
     public void protostuffSerialize(Blackhole b) {
         b.consume(protostuff.searialize(obj));
     }

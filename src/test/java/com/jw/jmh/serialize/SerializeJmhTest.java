@@ -41,6 +41,8 @@ import java.util.stream.IntStream;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
 public class SerializeJmhTest {
+    private final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
+
     @Param({"100000", "1000000"})
     private int len;
     private List<Person> dataList;
@@ -54,7 +56,7 @@ public class SerializeJmhTest {
                 .include(SerializeJmhTest.class.getSimpleName())
                 .warmupIterations(3)
                 .measurementIterations(3)
-                .timeout(TimeValue.seconds(30))
+                .measurementTime(TimeValue.minutes(5))
                 .result("serialize_test_jmh.json")
                 .resultFormat(ResultFormatType.JSON)
                 .jvmArgs("-ea")
@@ -85,19 +87,15 @@ public class SerializeJmhTest {
 
     @Setup
     public void init() {
-        RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
-
         dataList = IntStream.range(1, len).mapToObj(i -> {
             Person person = new Person();
             person.setName(generator.generate(6, 8));
             person.setAddr(generator.generate(128));
             person.setAge(generator.generate(1).charAt(0));
             person.setOccupational(generator.generate(64));
-            person.setSex((byte)0);
+            person.setSex((byte) 0);
             return person;
         }).collect(Collectors.toList());
-
-        System.out.println("init success.");
     }
 
     @TearDown
