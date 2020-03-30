@@ -1,6 +1,7 @@
 package com.jw.jmh.serialize.bo;
 
 import lombok.Data;
+import org.msgpack.annotation.Message;
 
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
  * Copyright (C) 2020 JW All rights reserved.
  */
 @Data
+@Message
 public class Person implements Serializable {
     private String name;
     private String addr;

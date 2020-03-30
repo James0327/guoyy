@@ -2,12 +2,14 @@ package com.jw.jmh.serialize;
 
 import com.jw.jmh.serialize.bo.Person;
 import com.jw.jmh.serialize.impl.FastJsonImpl;
+import com.jw.jmh.serialize.impl.MsgPackDataBindImpl;
 import com.jw.jmh.serialize.impl.MsgPackImpl;
 import com.jw.jmh.serialize.impl.ProtostuffImpl;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.text.RandomStringGenerator;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
@@ -44,6 +46,7 @@ public class SerializeJmhTest2 {
     private Person obj;
 
     final FastJsonImpl fastJson = new FastJsonImpl();
+    final MsgPackDataBindImpl msgPackDataBind = new MsgPackDataBindImpl();
     final MsgPackImpl msgPack = new MsgPackImpl();
     final ProtostuffImpl protostuff = new ProtostuffImpl();
 
@@ -77,25 +80,33 @@ public class SerializeJmhTest2 {
     @Benchmark
     @BenchmarkMode({Mode.SingleShotTime})
     @Measurement(batchSize = 100_000_000)
+    public void msgPackDataBindSerialize(Blackhole b) throws IOException {
+        b.consume(msgPackDataBind.searialize(obj));
+    }
+
+    @Benchmark
+    @BenchmarkMode({Mode.SingleShotTime})
+    @Measurement(batchSize = 100_000_000)
     public void protostuffSerialize(Blackhole b) {
         b.consume(protostuff.searialize(obj));
     }
 
-    @Setup
+    @Setup(Level.Iteration)
     public void init() {
         Person person = new Person();
         person.setName(generator.generate(6, 8));
         person.setAddr(generator.generate(128));
         person.setAge(generator.generate(1).charAt(0));
+        person.setPhone(generator.generate(11));
         person.setOccupational(generator.generate(64));
-        person.setSex((byte) 0);
+        person.setSex((byte)0);
 
         this.obj = person;
 
         System.out.println(ToStringBuilder.reflectionToString(this.obj));
     }
 
-    @TearDown
+    @TearDown(Level.Iteration)
     public void destroy() {
         obj = null;
     }

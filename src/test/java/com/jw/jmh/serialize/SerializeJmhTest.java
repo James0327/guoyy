@@ -2,6 +2,7 @@ package com.jw.jmh.serialize;
 
 import com.jw.jmh.serialize.bo.Person;
 import com.jw.jmh.serialize.impl.FastJsonImpl;
+import com.jw.jmh.serialize.impl.MsgPackDataBindImpl;
 import com.jw.jmh.serialize.impl.MsgPackImpl;
 import com.jw.jmh.serialize.impl.ProtostuffImpl;
 import org.apache.commons.text.RandomStringGenerator;
@@ -48,6 +49,7 @@ public class SerializeJmhTest {
     private List<Person> dataList;
 
     final FastJsonImpl fastJson = new FastJsonImpl();
+    final MsgPackDataBindImpl msgPackDataBind = new MsgPackDataBindImpl();
     final MsgPackImpl msgPack = new MsgPackImpl();
     final ProtostuffImpl protostuff = new ProtostuffImpl();
 
@@ -79,6 +81,13 @@ public class SerializeJmhTest {
     }
 
     @Benchmark
+    public void msgPackDataBindSerialize(Blackhole b) throws IOException {
+        for (Person obj : dataList) {
+            b.consume(msgPackDataBind.searialize(obj));
+        }
+    }
+
+    @Benchmark
     public void protostuffSerialize(Blackhole b) {
         for (Person obj : dataList) {
             b.consume(protostuff.searialize(obj));
@@ -92,10 +101,12 @@ public class SerializeJmhTest {
             person.setName(generator.generate(6, 8));
             person.setAddr(generator.generate(128));
             person.setAge(generator.generate(1).charAt(0));
+            person.setPhone(generator.generate(11));
             person.setOccupational(generator.generate(64));
-            person.setSex((byte) 0);
+            person.setSex((byte)0);
             return person;
         }).collect(Collectors.toList());
+        System.out.println("dataList size: " + dataList.size());
     }
 
     @TearDown
