@@ -2,6 +2,7 @@ package com.jw.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
@@ -20,8 +21,22 @@ import java.util.stream.Stream;
 public class Test3 {
 
     @Test
-    public void test() {
+    public void test1() {
+        LocalTime now = LocalTime.now();
+        System.out.println(now);
 
+        int minute = LocalTime.now().getMinute();
+        System.out.println(minute);
+
+        LocalTime localTime = LocalTime.now().minusMinutes(LocalTime.now().getMinute());
+        System.out.println(localTime);
+
+        long l = TimeUnit.MINUTES.toSeconds(1);
+        System.out.println(l);
+    }
+
+    @Test
+    public void test() {
         CompletableFuture<com.jw.demo.Test3>[] futures = IntStream.range(0, 10).boxed().map(i -> {
             CompletableFuture<com.jw.demo.Test3> future = CompletableFuture.supplyAsync(() -> {
                 com.jw.demo.Test3 test3 = com.jw.demo.Test3.getInstance();
