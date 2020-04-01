@@ -44,7 +44,7 @@ import java.util.stream.IntStream;
 public class SerializeJmhTest {
     private final RandomStringGenerator generator = new RandomStringGenerator.Builder().withinRange('a', 'z').build();
 
-    @Param({"100000", "1000000"})
+    @Param({"1000", "10000", "100000"})
     private int len;
     private List<Person> dataList;
 
@@ -103,7 +103,7 @@ public class SerializeJmhTest {
             person.setAge(generator.generate(1).charAt(0));
             person.setPhone(generator.generate(11));
             person.setOccupational(generator.generate(64));
-            person.setSex((byte)0);
+            person.setSex((byte) 0);
             return person;
         }).collect(Collectors.toList());
         System.out.println("dataList size: " + dataList.size());

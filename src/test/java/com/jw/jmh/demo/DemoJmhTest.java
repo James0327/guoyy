@@ -80,6 +80,7 @@ public class DemoJmhTest {
         singleStreamCal = new SingleStreamCal();
         singleThreadCal = new SingleThreadCal();
         parallelStreamCal = new ParallelStreamCal();
+        System.out.println("numbers size: " + numbers.length);
     }
 
     @TearDown
