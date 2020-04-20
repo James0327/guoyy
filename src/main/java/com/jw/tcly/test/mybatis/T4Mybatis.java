@@ -1,8 +1,8 @@
-package com.jw.tc.test.mybatis;
+package com.jw.tcly.test.mybatis;
 
 import com.alibaba.fastjson.JSON;
-import com.jw.tc.test.mybatis.dao.UserDAO;
-import com.jw.tc.test.mybatis.dto.UserDO;
+import com.jw.tcly.test.mybatis.dao.UserDAO;
+import com.jw.tcly.test.mybatis.dto.UserDO;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.Configuration;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @Description: test com.tc.test.mybatis.T4Mybatis
- * @Package: com.tc.test.mybatis
+ * @Description: test com.tcly.test.mybatis.T4Mybatis
+ * @Package: com.tcly.test.mybatis
  * @ClassName: T4Mybatis
  * @Author: james.guo
  * @Date: 2019/10/16 22:22

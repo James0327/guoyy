@@ -1,8 +1,8 @@
 package com.jw.test;
 
 
-import com.jw.tc.test.proxy.CglibMethodInterceptor;
-import com.jw.tc.test.proxy.Dog;
+import com.jw.tcly.test.proxy.CglibMethodInterceptor;
+import com.jw.tcly.test.proxy.Dog;
 import net.sf.cglib.proxy.Enhancer;
 
 /**

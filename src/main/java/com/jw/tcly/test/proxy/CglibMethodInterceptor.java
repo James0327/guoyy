@@ -1,4 +1,4 @@
-package com.jw.tc.test.proxy;
+package com.jw.tcly.test.proxy;
 
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -8,8 +8,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 /**
- * @Description: test com.tc.test.proxy.CglibMethodInterceptor
- * @Package: com.tc.test.proxy
+ * @Description: test com.tcly.test.proxy.CglibMethodInterceptor
+ * @Package: com.tcly.test.proxy
  * @ClassName: CglibMethodInterceptor
  * @Author: james.guo
  * @Date: 2019/10/17 13:49

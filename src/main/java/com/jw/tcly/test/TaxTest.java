@@ -1,8 +1,8 @@
-package com.jw.tc.test;
+package com.jw.tcly.test;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.jw.tc.utils.SerializationUtil;
+import com.jw.tcly.utils.SerializationUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,8 +12,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Description: test com.tc.test.TaxTest
- * @Package: com.tc.utils
+ * @Description: test com.tcly.test.TaxTest
+ * @Package: com.tcly.utils
  * @ClassName: TaxTest
  * @Author: james.guo
  * @Date: 2019/4/28 11:19

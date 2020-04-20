@@ -1,10 +1,10 @@
-package com.jw.tc.test.proxy.impl;
+package com.jw.tcly.test.proxy.impl;
 
-import com.jw.tc.test.proxy.Person;
+import com.jw.tcly.test.proxy.Person;
 
 /**
- * @Description: test com.tc.test.proxy.impl.SoftwareEngineer
- * @Package: com.tc.test.proxy.impl
+ * @Description: test com.tcly.test.proxy.impl.SoftwareEngineer
+ * @Package: com.tcly.test.proxy.impl
  * @ClassName: SoftwareEngineer
  * @Author: james.guo
  * @Date: 2019/10/17 11:39

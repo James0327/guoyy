@@ -1,8 +1,8 @@
-package com.jw.tc.test.proxy;
+package com.jw.tcly.test.proxy;
 
 /**
- * @Description: test com.tc.test.proxy.Person
- * @Package: com.tc.test.proxy
+ * @Description: test com.tcly.test.proxy.Person
+ * @Package: com.tcly.test.proxy
  * @ClassName: Person
  * @Author: james.guo
  * @Date: 2019/10/17 11:37

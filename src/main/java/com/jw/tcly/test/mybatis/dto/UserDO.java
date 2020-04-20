@@ -1,12 +1,12 @@
-package com.jw.tc.test.mybatis.dto;
+package com.jw.tcly.test.mybatis.dto;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * @Description: test com.tc.test.mybatis.dao.UserDO
- * @Package: com.tc.test.mybatis.dao
+ * @Description: test com.tcly.test.mybatis.dao.UserDO
+ * @Package: com.tcly.test.mybatis.dao
  * @ClassName: UserDO
  * @Author: james.guo
  * @Date: 2019/10/15 11:29

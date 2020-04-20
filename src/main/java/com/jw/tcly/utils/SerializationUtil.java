@@ -1,4 +1,4 @@
-package com.jw.tc.utils;
+package com.jw.tcly.utils;
 
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;

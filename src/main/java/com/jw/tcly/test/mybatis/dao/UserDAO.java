@@ -1,14 +1,14 @@
-package com.jw.tc.test.mybatis.dao;
+package com.jw.tcly.test.mybatis.dao;
 
-import com.jw.tc.test.mybatis.dto.UserDO;
+import com.jw.tcly.test.mybatis.dto.UserDO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 /**
- * @Description: test com.tc.test.mybatis.dao.UserDAO
- * @Package: com.tc.test.mybatis.dao
+ * @Description: test com.tcly.test.mybatis.dao.UserDAO
+ * @Package: com.tcly.test.mybatis.dao
  * @ClassName: UserDAO
  * @Author: james.guo
  * @Date: 2019/10/15 11:27

@@ -1,4 +1,4 @@
-package com.jw.tc.test.mybatis;
+package com.jw.tcly.test.mybatis;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: test com.tc.test.mybatis.T1
- * @Package: com.tc.test.mybatis
+ * @Description: test com.tcly.test.mybatis.T1
+ * @Package: com.tcly.test.mybatis
  * @ClassName: T1
  * @Author: james.guo
  * @Date: 2019/10/14 22:11

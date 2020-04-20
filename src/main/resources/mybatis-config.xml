@@ -54,9 +54,9 @@
         <!-- 使用完全限定资源定位符（URL） -->
         <!--<mapper url="file:///UserMapper.xml"/>-->
         <!-- 使用映射器接口实现类的完全限定类名 -->
-        <!--<mapper class="com.tc.test.mybatis.dao.UserDAO"/>-->
+        <!--<mapper class="com.tcly.test.mybatis.dao.UserDAO"/>-->
         <!-- 将包内的映射器接口实现全部注册为映射器 -->
-        <!--<package name="com.tc.test.mybatis.dao"/>-->
+        <!--<package name="com.tcly.test.mybatis.dao"/>-->
     </mappers>
 
 </configuration>

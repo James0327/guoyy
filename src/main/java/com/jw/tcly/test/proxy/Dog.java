@@ -1,8 +1,8 @@
-package com.jw.tc.test.proxy;
+package com.jw.tcly.test.proxy;
 
 /**
- * @Description: test com.tc.test.proxy.Dog
- * @Package: com.tc.test.proxy
+ * @Description: test com.tcly.test.proxy.Dog
+ * @Package: com.tcly.test.proxy
  * @ClassName: Dog
  * @Author: james.guo
  * @Date: 2019/10/17 14:21

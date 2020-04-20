@@ -1,4 +1,4 @@
-package com.jw.tc.test;
+package com.jw.tcly.test;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Getter;
@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @Description: test com.tc.test.Person
- * @Package: com.tc.test
+ * @Description: test com.tcly.test.Person
+ * @Package: com.tcly.test
  * @ClassName: Person
  * @Author: james.guo
  * @Date: 2019/8/26 18:24

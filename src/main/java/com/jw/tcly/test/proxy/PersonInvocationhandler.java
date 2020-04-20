@@ -1,4 +1,4 @@
-package com.jw.tc.test.proxy;
+package com.jw.tcly.test.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 /**
- * @Description: test com.tc.test.proxy.PersonInvocationhandler
- * @Package: com.tc.test.proxy
+ * @Description: test com.tcly.test.proxy.PersonInvocationhandler
+ * @Package: com.tcly.test.proxy
  * @ClassName: PersonInvocationhandler
  * @Author: james.guo
  * @Date: 2019/10/17 11:42

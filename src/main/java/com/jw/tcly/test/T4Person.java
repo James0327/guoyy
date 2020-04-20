@@ -1,4 +1,4 @@
-package com.jw.tc.test;
+package com.jw.tcly.test;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: test com.tc.test.T4Person
- * @Package: com.tc.test
+ * @Description: test com.tcly.test.T4Person
+ * @Package: com.tcly.test
  * @ClassName: T4Person
  * @Author: james.guo
  * @Date: 2019/8/26 18:26
