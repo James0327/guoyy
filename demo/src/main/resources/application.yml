@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: warn
+
+hbase:
+  enable: true
+  table-name: james
+  column-family: f
+  token: jw
+  zookeeper: locahost
+  port: 2181
