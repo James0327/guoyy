@@ -1,5 +1,14 @@
 package com.jw.demo;
 
+import com.jw.demo.fsm.Events;
+import com.jw.demo.fsm.States;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.statemachine.StateMachine;
+
+import javax.annotation.Resource;
+
 /**
  * guoyy com.jw.demo
  *
@@ -10,5 +19,21 @@ package com.jw.demo;
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
-public class A {
+@SpringBootApplication
+public class A implements CommandLineRunner {
+    @Resource
+    private StateMachine<States, Events> stateMachine;
+
+    public static void main(String[] args) {
+        SpringApplication.run(A.class, args);
+    }
+
+    @Override
+    public void run(String... args) {
+        stateMachine.start();
+
+        stateMachine.sendEvent(Events.PAY);
+        stateMachine.sendEvent(Events.RECEIVE);
+
+    }
 }
