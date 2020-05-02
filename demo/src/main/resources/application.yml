@@ -9,3 +9,7 @@ hbase:
   token: jw
   zookeeper: locahost
   port: 2181
+
+spring:
+  main:
+    allow-bean-definition-overriding: true

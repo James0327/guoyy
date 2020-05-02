@@ -8,14 +8,14 @@ import org.springframework.statemachine.annotation.WithStateMachine;
 /**
  * guoyy com.jw.demo.fsm
  *
- * @Description: com.jw.demo.fsm.EventConfig
+ * @Description: com.jw.demo.fsm.TurnsEventConfig
  * @Author: guoyiyong/james
  * @Date: 2020-04-26 00:39
  * @Version: 1.0
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
-@WithStateMachine
+@WithStateMachine(id = "order")
 public class EventConfig {
     private Logger logger = LoggerFactory.getLogger(getClass());
 

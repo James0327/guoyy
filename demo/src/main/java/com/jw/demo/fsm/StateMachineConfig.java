@@ -25,27 +25,27 @@ import java.util.EnumSet;
 @Slf4j
 @Configuration
 @EnableStateMachine
-public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States, Events> {
+public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<Status, Events> {
 
     @Override
-    public void configure(StateMachineConfigurationConfigurer<States, Events> config) throws Exception {
-        config.withConfiguration()
-                .listener(new StateMachineListenerAdapter<States, Events>() {
+    public void configure(StateMachineConfigurationConfigurer<Status, Events> config) throws Exception {
+        config.withConfiguration().machineId("order")
+                .listener(new StateMachineListenerAdapter<Status, Events>() {
                     @Override
-                    public void transition(Transition<States, Events> transition) {
-                        if (transition.getTarget().getId() == States.UNPAID) {
+                    public void transition(Transition<Status, Events> transition) {
+                        if (transition.getTarget().getId() == Status.UNPAID) {
                             log.info("订单创建，待支付");
                             return;
                         }
 
-                        if (transition.getSource().getId() == States.UNPAID
-                                && transition.getTarget().getId() == States.WAITING_RECEIVE) {
+                        if (transition.getSource().getId() == Status.UNPAID
+                                && transition.getTarget().getId() == Status.WAITING_RECEIVE) {
                             log.info("用户完成支付，待收货");
                             return;
                         }
 
-                        if (transition.getSource().getId() == States.WAITING_RECEIVE
-                                && transition.getTarget().getId() == States.DONE) {
+                        if (transition.getSource().getId() == Status.WAITING_RECEIVE
+                                && transition.getTarget().getId() == Status.DONE) {
                             log.info("用户已收货，订单完成");
                             return;
                         }
@@ -54,24 +54,24 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     }
 
     @Override
-    public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
+    public void configure(StateMachineStateConfigurer<Status, Events> states) throws Exception {
         // 定义状态机中的状态
         states.withStates()
                 // 初始状态
-                .initial(States.UNPAID)
-                .states(EnumSet.allOf(States.class));
+                .initial(Status.UNPAID)
+                .states(EnumSet.allOf(Status.class));
     }
 
     @Override
-    public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {
+    public void configure(StateMachineTransitionConfigurer<Status, Events> transitions) throws Exception {
         transitions.withExternal()
-                .source(States.UNPAID)
-                .target(States.WAITING_RECEIVE)
+                .source(Status.UNPAID)
+                .target(Status.WAITING_RECEIVE)
                 .event(Events.PAY)
                 .and()
                 .withExternal()
-                .source(States.WAITING_RECEIVE)
-                .target(States.DONE)
+                .source(Status.WAITING_RECEIVE)
+                .target(Status.DONE)
                 .event(Events.RECEIVE)
         ;
 

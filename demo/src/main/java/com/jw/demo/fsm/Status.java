@@ -10,7 +10,7 @@ package com.jw.demo.fsm;
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
-public enum States {
+public enum Status {
     UNPAID,
     WAITING_RECEIVE,
     DONE;
