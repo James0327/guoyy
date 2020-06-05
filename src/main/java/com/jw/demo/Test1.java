@@ -1,5 +1,7 @@
 package com.jw.demo;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * guoyy com.jw.demo
  *
@@ -10,6 +12,7 @@ package com.jw.demo;
  * <p>
  * Copyright (C) 2019 JW All rights reserved.
  */
+@Slf4j
 public final class Test1 {
 
     private Test1() {
