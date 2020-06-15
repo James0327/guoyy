@@ -1,9 +1,9 @@
 package com.jw.eda.async;
 
 /**
- * guoyy com.jw.eda.sync.async
+ * guoyy com.jw.eda.sync.dsfjob
  *
- * @Description: com.jw.eda.sync.async.Message
+ * @Description: com.jw.eda.sync.dsfjob.Message
  * @Author: guoyiyong/james
  * @Date: 2019-09-24 23:58
  * @Version: 1.0

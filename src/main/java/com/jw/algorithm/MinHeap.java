@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * test com.jw.t.algorithm
+ * 从左往右滑动窗口时的最大的N个数。
  *
  * @Description: com.jw.t.algorithm.MinHeap
  * @Author: guoyiyong/james.guo
@@ -42,13 +43,15 @@ public class MinHeap {
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[99];
-        for (int i = 0; i < 99; i++) {
-            arr[i] = ThreadLocalRandom.current().nextInt(99);
+        int bound = 99;
+        int[] arr = new int[bound];
+        for (int i = 0; i < bound; i++) {
+            arr[i] = ThreadLocalRandom.current().nextInt(bound);
         }
         System.out.println(ToStringBuilder.reflectionToString(arr));
         MyMinHeap myMinHeap = new MyMinHeap(3);
         for (int i = 0, len = arr.length; i < len; i++) {
+            System.out.print(arr[i] + "\t");
             myMinHeap.add(arr[i]);
             Integer peek = myMinHeap.peek();
             System.out.println("peek: " + peek + "/" + myMinHeap.queue.toString());

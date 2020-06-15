@@ -16,7 +16,7 @@ import java.util.Map;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class LruCache2<K, V> extends LinkedHashMap<K, V> {
-    private static int MAX_CACHE_SIZE;
+    private final int MAX_CACHE_SIZE;
 
     public LruCache2(int MAX_CACHE_SIZE) {
         super(MAX_CACHE_SIZE, 0.75f, true);

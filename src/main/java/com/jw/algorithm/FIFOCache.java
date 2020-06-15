@@ -16,7 +16,7 @@ import java.util.Map;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class FIFOCache<K, V> extends LinkedHashMap<K, V> {
-    private static int MAX_CACHE_SIZE;
+    private final int MAX_CACHE_SIZE;
 
     public FIFOCache(int MAX_CACHE_SIZE) {
         super(MAX_CACHE_SIZE, 0.75f, false);
@@ -29,7 +29,6 @@ public class FIFOCache<K, V> extends LinkedHashMap<K, V> {
     }
 
     public static void main(String[] args) {
-
         FIFOCache<Integer, Integer> cache = new FIFOCache<>(2);
         cache.put(1, 1);
         System.out.println(JSON.toJSONString(cache));
