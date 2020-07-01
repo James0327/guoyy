@@ -37,158 +37,165 @@ import java.util.stream.Stream;
  */
 public class TT1 {
 
-	private enum PassengerTypeEnum {
-		ADT("ADT", "成人"),
-		CHD("CHD", "儿童"),
-		CNN("CNN", "儿童"),
-		STU("STU", "学生"),
-		INF("INF", "婴儿");
+    private ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 
-		private String code;
+    private enum PassengerTypeEnum {
+        ADT("ADT", "成人"),
+        CHD("CHD", "儿童"),
+        CNN("CNN", "儿童"),
+        STU("STU", "学生"),
+        INF("INF", "婴儿");
 
-		private String description;
+        private String code;
 
-		PassengerTypeEnum(String code, String description) {
-			this.code = code;
-			this.description = description;
-		}
+        private String description;
 
-		public void setCode(String code) {
-			this.code = code;
-		}
+        PassengerTypeEnum(String code, String description) {
+            this.code = code;
+            this.description = description;
+        }
 
-		public String getCode() {
-			return code;
-		}
+        public void setCode(String code) {
+            this.code = code;
+        }
 
-		public static PassengerTypeEnum getByCode(String code) {
-			for (PassengerTypeEnum passengerTypeEnum : PassengerTypeEnum.values()) {
-				if (passengerTypeEnum.getCode().equals(code)) {
-					return passengerTypeEnum;
-				}
-			}
-			return null;
-		}
+        public String getCode() {
+            return code;
+        }
 
-	}
+        public static PassengerTypeEnum getByCode(String code) {
+            for (PassengerTypeEnum passengerTypeEnum : PassengerTypeEnum.values()) {
+                if (passengerTypeEnum.getCode().equals(code)) {
+                    return passengerTypeEnum;
+                }
+            }
+            return null;
+        }
 
-	private static final Pattern TIME_PATTERN = Pattern.compile("^T\\d{8}$");
-	private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'T'MMddHHmm");
+    }
 
-	@Test
-	public void test() {
-		Pattern COMPILE = Pattern.compile("(?<=[\\-,])[\\w]{2}(?=[\\-,])");
+    private static final Pattern TIME_PATTERN = Pattern.compile("^T\\d{8}$");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'T'MMddHHmm");
 
-		String str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
+    @Test
+    public void test() {
+        threadLocal.set(new Object());
+        threadLocal.get();
 
-		Matcher matcher = COMPILE.matcher(str);
-		while (matcher.find()) {
-			System.out.println(matcher.group());
-		}
+        threadLocal.remove();
 
-		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        Pattern COMPILE = Pattern.compile("(?<=[\\-,])[\\w]{2}(?=[\\-,])");
 
-		COMPILE = Pattern.compile("(?<=,)[\\w]{2}(?=\\-)");
+        String str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
 
-		str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
+        Matcher matcher = COMPILE.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
 
-		matcher = COMPILE.matcher(str);
-		while (matcher.find()) {
-			System.out.println(matcher.group());
-		}
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 
-		int i = Integer.parseInt("1010", 2);
-		System.out.println(i);
-	}
+        COMPILE = Pattern.compile("(?<=,)[\\w]{2}(?=\\-)");
 
-	public static void main(String[] args) {
+        str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
 
-		for (PassengerTypeEnum type : PassengerTypeEnum.values()) {
-			System.out.println(type + "/" + type.ordinal());
-		}
+        matcher = COMPILE.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
 
-		List<Integer> list0 = new ArrayList<>();
-		list0.add(1);
-		list0.add(2);
+        int i = Integer.parseInt("1010", 2);
+        System.out.println(i);
+    }
 
-		Integer integer = list0.get(list0.size() - 1);
-		System.out.println("integer:" + integer);
+    public static void main(String[] args) {
 
-		int[] arr = IntStream.range(1, 10).toArray();
-		System.out.println(ToStringBuilder.reflectionToString(arr));
-		int len = arr.length, idx = len - 2;
-		for (int i = 0; i < len; i++) {
-			if (i >= idx) {
-				System.out.println("i2:" + arr[i]);
-				continue;
-			}
-			System.out.println("i:" + arr[i]);
-		}
+        for (PassengerTypeEnum type : PassengerTypeEnum.values()) {
+            System.out.println(type + "/" + type.ordinal());
+        }
 
-		String time = LocalDateTime.now().format(formatter);
-		System.out.println("time: " + time);
+        List<Integer> list0 = new ArrayList<>();
+        list0.add(1);
+        list0.add(2);
 
-		boolean flag = TIME_PATTERN.matcher(time).matches();
+        Integer integer = list0.get(list0.size() - 1);
+        System.out.println("integer:" + integer);
 
-		System.out.println("flag: " + flag);
+        int[] arr = IntStream.range(1, 10).toArray();
+        System.out.println(ToStringBuilder.reflectionToString(arr));
+        int len = arr.length, idx = len - 2;
+        for (int i = 0; i < len; i++) {
+            if (i >= idx) {
+                System.out.println("i2:" + arr[i]);
+                continue;
+            }
+            System.out.println("i:" + arr[i]);
+        }
 
-		Map<String, String> map = Stream.of(
-				ImmutablePair.of("Amadeus", "1A"),
-				ImmutablePair.of("Sabre", "1S"),
-				ImmutablePair.of("Galileo", "1G"),
-				ImmutablePair.of("SpaceX", "")
-		).collect(Collectors.toMap(Pair::getLeft, Pair::getRight));
+        String time = LocalDateTime.now().format(formatter);
+        System.out.println("time: " + time);
 
-		System.out.println("map: " + JSON.toJSONString(map));
+        boolean flag = TIME_PATTERN.matcher(time).matches();
 
-		String str0 = "{\"SpaceX\":\"\",\"Sabre\":\"1S\",\"Galileo\":\"1G\",\"Amadeus\":\"1A\"}";
-		Map<String, String> map1 = JSON.parseObject(str0, HashMap.class);
-		System.out.println(map1);
+        System.out.println("flag: " + flag);
 
-		J2CacheConfig config = new J2CacheConfig();
+        Map<String, String> map = Stream.of(
+                ImmutablePair.of("Amadeus", "1A"),
+                ImmutablePair.of("Sabre", "1S"),
+                ImmutablePair.of("Galileo", "1G"),
+                ImmutablePair.of("SpaceX", "")
+        ).collect(Collectors.toMap(Pair::getLeft, Pair::getRight));
 
-		J2CacheBuilder.init(config);
+        System.out.println("map: " + JSON.toJSONString(map));
 
-		String str = "MF0837";
-		System.out.println(str.substring(0, 2));
-		System.out.println(str.substring(2));
+        String str0 = "{\"SpaceX\":\"\",\"Sabre\":\"1S\",\"Galileo\":\"1G\",\"Amadeus\":\"1A\"}";
+        Map<String, String> map1 = JSON.parseObject(str0, HashMap.class);
+        System.out.println(map1);
 
-		Person p = new Person();
-		p.setName("name1");
-		p.setAge(1);
-		p.setAddr("addr");
+        J2CacheConfig config = new J2CacheConfig();
 
-		List<Person> list = Lists.newArrayList();
-		list.add(p);
-		list.add(p);
-		list.add(p);
+        J2CacheBuilder.init(config);
 
-		String json0 = JSON.toJSONString(list);
-		String json1 = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+        String str = "MF0837";
+        System.out.println(str.substring(0, 2));
+        System.out.println(str.substring(2));
 
-		System.out.println(json0);
-		System.out.println(json1);
+        Person p = new Person();
+        p.setName("name1");
+        p.setAge(1);
+        p.setAddr("addr");
 
-		Type type = new TypeReference<List<Person>>() {}.getType();
+        List<Person> list = Lists.newArrayList();
+        list.add(p);
+        list.add(p);
+        list.add(p);
 
-		List<Person> list1 = JSON.parseObject(json0, type);
-		System.out.println(list1);
+        String json0 = JSON.toJSONString(list);
+        String json1 = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
 
-		int i1 = 0xFFFFFFFF;
-		System.out.println(i1 + "][" + Integer.toBinaryString(i1));
+        System.out.println(json0);
+        System.out.println(json1);
 
-		System.out.println(new Date(1557915201118L));
+        Type type = new TypeReference<List<Person>>() {}.getType();
 
-		// 获取截断日期（当天）
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
-		Date date = calendar.getTime();
+        List<Person> list1 = JSON.parseObject(json0, type);
+        System.out.println(list1);
 
-		System.out.println("date: " + date);
+        int i1 = 0xFFFFFFFF;
+        System.out.println(i1 + "][" + Integer.toBinaryString(i1));
 
-	}
+        System.out.println(new Date(1557915201118L));
+
+        // 获取截断日期（当天）
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date date = calendar.getTime();
+
+        System.out.println("date: " + date);
+
+    }
 
 }
