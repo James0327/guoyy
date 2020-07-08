@@ -17,7 +17,7 @@ import org.springframework.statemachine.persist.StateMachinePersister;
 import javax.annotation.Resource;
 import java.util.UUID;
 
-@SpringBootTest(classes = DemoApplication.class)
+@SpringBootTest(classes = GuoyyApplication.class)
 public class DemoApplicationTests {
     @Resource
     private HBaseService hBaseService;
