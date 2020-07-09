@@ -1,4 +1,4 @@
-package com.jw.algorithm.bloomfilters;
+package com.jw.bloomfilters;
 
 import com.alibaba.fastjson.JSON;
 import com.jw.dto.Person;

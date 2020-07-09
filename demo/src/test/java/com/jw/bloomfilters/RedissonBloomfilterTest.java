@@ -1,4 +1,4 @@
-package com.jwå.bloomfilters;
+package com.jw.bloomfilters;
 
 import com.alibaba.fastjson.JSON;
 import com.jw.GuoyyApplication;
