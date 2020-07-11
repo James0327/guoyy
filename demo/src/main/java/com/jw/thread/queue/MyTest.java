@@ -2,7 +2,7 @@ package com.jw.thread.queue;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadLocalRandom;

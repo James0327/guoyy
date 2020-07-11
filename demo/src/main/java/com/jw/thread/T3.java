@@ -1,7 +1,7 @@
 package com.jw.thread;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.SynchronousQueue;
@@ -16,32 +16,32 @@ import java.util.concurrent.locks.LockSupport;
  * @Author: james.guo
  * @Date: 2019/8/5 10:28
  * @Version: 1.0
- *
+ * <p>
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class T3 {
 
-	@Test
-	public void test() {
-		ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 2, 0, TimeUnit.SECONDS,
-				new SynchronousQueue<>(), new BasicThreadFactory.Builder().namingPattern("test-%d").build(),
-				new ThreadPoolExecutor.AbortPolicy());
+    @Test
+    public void test() {
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 2, 0, TimeUnit.SECONDS,
+                new SynchronousQueue<>(), new BasicThreadFactory.Builder().namingPattern("test-%d").build(),
+                new ThreadPoolExecutor.AbortPolicy());
 
-		Future<?> future = executor.submit(() -> {
-			while (!Thread.currentThread().isInterrupted()) {
-				System.out.println("! Thread.currentThread().isInterrupted");
-				LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(100));
-			}
-			System.out.println("Thread.currentThread().isInterrupted");
-		});
-		try {
-			future.get(1, TimeUnit.SECONDS);
-		} catch (Exception e) {
-			future.cancel(true);
-		}
+        Future<?> future = executor.submit(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                System.out.println("! Thread.currentThread().isInterrupted");
+                LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(100));
+            }
+            System.out.println("Thread.currentThread().isInterrupted");
+        });
+        try {
+            future.get(1, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            future.cancel(true);
+        }
 
-		executor.shutdown();
-		executor.shutdownNow();
-	}
+        executor.shutdown();
+        executor.shutdownNow();
+    }
 
 }

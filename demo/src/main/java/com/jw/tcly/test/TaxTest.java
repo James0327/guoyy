@@ -6,7 +6,7 @@ import com.jw.tcly.utils.SerializationUtil;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.Serializable;
 import java.util.List;
@@ -66,8 +66,8 @@ public class TaxTest {
         byte b1 = 1;
         byte b2 = 2;
 
-        int i1 = (int) b1;
-        int i2 = (int) b2;
+        int i1 = (int)b1;
+        int i2 = (int)b2;
 
         System.out.println(i1);
         System.out.println(i2);

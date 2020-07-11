@@ -10,7 +10,7 @@ import net.oschina.j2cache.J2CacheConfig;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
