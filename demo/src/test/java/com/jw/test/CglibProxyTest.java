@@ -1,9 +1,14 @@
 package com.jw.test;
 
-
 import com.jw.tcly.test.proxy.CglibMethodInterceptor;
+import com.jw.tcly.test.proxy.ConcreteClassFixedValue;
 import com.jw.tcly.test.proxy.Dog;
+import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.NoOp;
+
+import java.lang.reflect.Method;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @Description: test PACKAGE_NAME.CglibProxyTest
@@ -28,11 +33,32 @@ public class CglibProxyTest {
         // 创建加强器，用来创建动态代理类
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(Dog.class);
+
+        Callback noOp = NoOp.INSTANCE;
         CglibMethodInterceptor methodInterceptor = new CglibMethodInterceptor();
-        enhancer.setCallback(methodInterceptor);
-        Dog dog = (Dog) enhancer.create();
-        String ret = dog.call();
-        System.out.println(ret);
+        Callback fixedValue = new ConcreteClassFixedValue();
+
+        Callback[] callbacks = new Callback[]{noOp, methodInterceptor, fixedValue};
+        enhancer.setCallbacks(callbacks);
+
+        int[] arr = {0, 2};
+
+        enhancer.setCallbackFilter((Method method) -> {
+            String name = method.getName();
+            if (!"call".equals(name)) {
+                int i = arr[ThreadLocalRandom.current().nextInt(0, 2)];
+                System.out.println("name: " + name + "/" + i);
+                return i;
+            }
+            return 1; // callbacks[1]
+        });
+        Dog dog = (Dog)enhancer.create();
+        String ret1 = dog.call();
+        System.out.println(dog + "][" + ret1);
+        String ret2 = dog.call();
+        System.out.println(dog + "][" + ret2);
+
+        System.out.println("hashCode: " + dog.hashCode());
     }
 
 }
