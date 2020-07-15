@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
+
 /**
  * taxbag-batch-core com.ly.ic.tcschedule.dsfjob
  *
@@ -66,10 +69,12 @@ public class TcScheduleDsfJobHelper {
             final String jobName = jobReqDTO.getJobName();
 
             final DateTime start = DateTime.now();
-            System.out.println("消费逻辑。。。");
+            System.out.println("消费逻辑。。。" + jobName);
+            LockSupport.parkNanos(TimeUnit.MILLISECONDS.toNanos(1000));
             final DateTime end = DateTime.now();
             // 更新状态为就绪
             log.info("更新状态为就绪,JobName:{},{}=>{}", jobName, "DOING", "READY");
+            log.info("estimated time(ms): ", end.getMillis() - start.getMillis());
         }
     }
 
