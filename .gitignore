@@ -198,5 +198,7 @@ application.windows64
 application.macosx
 out
 
+logs
+
 cache
 !**/src/**/cache
