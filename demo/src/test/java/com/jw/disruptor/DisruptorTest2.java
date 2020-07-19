@@ -1,9 +1,5 @@
-package com.jw;
+package com.jw.disruptor;
 
-import com.jw.disruptor.LongEvent;
-import com.jw.disruptor.LongEventFactory;
-import com.jw.disruptor.LongEventHandler;
-import com.jw.disruptor.LongEventProducerWithTranslator;
 import com.lmax.disruptor.BlockingWaitStrategy;
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;

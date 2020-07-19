@@ -1,4 +1,4 @@
-package com.jw.test;
+package com.jw.disruptor;
 
 import com.jw.disruptor.dsfjob.JobReqDTO;
 import com.jw.disruptor.dsfjob.TcScheduleDsfJobHelper;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 /**
  * guoyy com.jw.test
  *
- * @Description: com.jw.test.TcScheduleDsfJobHelperTest
+ * @Description: com.jw.disruptor.TcScheduleDsfJobHelperTest
  * @Author: guoyiyong/james
  * @Date: 2020-07-13 18:55
  * @Version: 1.0
@@ -20,12 +20,12 @@ public class TcScheduleDsfJobHelperTest {
     public void test() throws InterruptedException {
         TcScheduleDsfJobHelper helper = new TcScheduleDsfJobHelper();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 30; i++) {
             JobReqDTO jobReqDTO = new JobReqDTO();
             jobReqDTO.setTraceId("trace-" + i);
             jobReqDTO.setJobName("job-" + i);
             helper.consume(jobReqDTO);
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
 
     }

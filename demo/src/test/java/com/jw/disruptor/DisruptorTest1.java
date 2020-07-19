@@ -1,4 +1,4 @@
-package com.jw;
+package com.jw.disruptor;
 
 import com.jw.disruptor.LongEvent;
 import com.lmax.disruptor.BlockingWaitStrategy;

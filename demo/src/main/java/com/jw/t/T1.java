@@ -19,6 +19,12 @@ public class T1 {
 
     public static void main(String[] args) {
 
+        int a = 123;
+        System.out.println(a * 4);
+        System.out.println(a << 2);
+
+        System.out.println("$$$$$$$$$$$$$$$$$$$$");
+
         List<String> ret1 = Stream.of(StringUtils.split("2,4,20,3,4,6", ","))
                 .sorted(Comparator.comparingInt(Integer::parseInt))
                 .collect(Collectors.toList());
