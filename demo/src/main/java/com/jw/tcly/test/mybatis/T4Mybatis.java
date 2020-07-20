@@ -9,9 +9,11 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.joda.time.DateTime;
 import org.junit.jupiter.api.Test;
 
 import java.io.Reader;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,6 +28,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class T4Mybatis {
+    private final ThreadLocalRandom random = ThreadLocalRandom.current();
 
     @Test
     public void testSelect() throws Exception {
@@ -42,8 +45,8 @@ public class T4Mybatis {
         System.out.println(JSON.toJSONString(rets));
 
         System.out.println("-----------------------------------");
-        UserDO ret = userDAO.selectById(99L);
-        System.out.println(JSON.toJSONString(ret));
+        UserDO ret = userDAO.selectById(2L);
+        System.out.println(JSON.toJSONStringWithDateFormat(ret, JSON.DEFFAULT_DATE_FORMAT));
 
         sqlSession.close();
     }
@@ -66,27 +69,54 @@ public class T4Mybatis {
 
     @Test
     public void testInsert() throws Exception {
+        System.out.println(System.getProperty("user.timezone"));
+
         Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-
         SqlSession sqlSession = sqlSessionFactory.openSession();
-
         UserDAO userDAO = sqlSession.getMapper(UserDAO.class);
 
-        ThreadLocalRandom random = ThreadLocalRandom.current();
-
-        for (int i = 0; i < 999; i++) {
-            UserDO userDO = new UserDO();
-            userDO.setUserName("name" + i);
-            userDO.setAccount(random.nextLong());
-            userDO.setPassword("xxx" + i);
-
-            int cnt = userDAO.insert(userDO);
-            System.out.println("insert " + (cnt >= 1 ? "true" : "false"));
-        }
+        insert1(userDAO);
+        insert2(userDAO);
 
         sqlSession.commit();
         sqlSession.close();
+    }
+
+    private void insert2(UserDAO userDAO) {
+        UserDO userDO = new UserDO();
+        userDO.setUserName("name2");
+        userDO.setAccount(random.nextLong());
+        userDO.setPassword("xxx2");
+
+        Date date = DateTime.now().withTimeAtStartOfDay().toDate();
+        System.out.println("date: " + date);
+
+        userDO.setTDate(date);
+        userDO.setTTime(date);
+        userDO.setTDatetime(date);
+        userDO.setTTimestamp(date);
+
+        int cnt = userDAO.insert(userDO);
+        System.out.println("insert " + (cnt >= 1 ? "true" : "false"));
+    }
+
+    private void insert1(UserDAO userDAO) {
+        UserDO userDO = new UserDO();
+        userDO.setUserName("name1");
+        userDO.setAccount(random.nextLong());
+        userDO.setPassword("xxx1");
+
+        Date date = DateTime.now().toDate();
+        System.out.println("date: " + date);
+
+        userDO.setTDate(date);
+        userDO.setTTime(date);
+        userDO.setTDatetime(date);
+        userDO.setTTimestamp(date);
+
+        int cnt = userDAO.insert(userDO);
+        System.out.println("insert " + (cnt >= 1 ? "true" : "false"));
     }
 
 }

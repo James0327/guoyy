@@ -22,7 +22,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.tc.test.mybatis.dto"/>
+        <package name="com.jw.tcly.test.mybatis.dto"/>
     </typeAliases>
 
     <typeHandlers>

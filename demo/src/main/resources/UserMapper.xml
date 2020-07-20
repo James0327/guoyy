@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.tc.test.mybatis.dao.UserDAO">
-    <resultMap id="BaseResultMap" type="UserDO">
+<mapper namespace="com.jw.tcly.test.mybatis.dao.UserDAO">
+    <resultMap id="BaseResultMap" type="com.jw.tcly.test.mybatis.dto.UserDO">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="account" property="account" jdbcType="BIGINT"/>
+        <result column="t_date" property="tDate" jdbcType="DATE"/>
+        <result column="t_time" property="tTime" jdbcType="TIME"/>
+        <result column="t_datetime" property="tDatetime" jdbcType="TIMESTAMP"/>
+        <result column="t_timestamp" property="tTimestamp" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <update id="update" parameterType="UserDO">
+    <update id="update" parameterType="com.jw.tcly.test.mybatis.dto.UserDO">
         update user_info
         <trim prefix="set" suffixOverrides=",">
-            <if test="user_name != null and user_name != ''">
+            <if test="userName != null and userName != ''">
                 user_name=#{userName},
             </if>
             <if test="password != null and password != ''">
@@ -22,12 +26,24 @@
             <if test="account != null">
                 account=#{account},
             </if>
+            <if test="tDate != null">
+                t_date=${tDate}
+            </if>
+            <if test="t_time != null">
+                t_time=${tTime}
+            </if>
+            <if test="t_datetime != null">
+                t_datetime=${tDatetime}
+            </if>
+            <if test="t_timestamp != null">
+                t_timestamp=${tTimestamp}
+            </if>
         </trim>
         where id = #{id}
     </update>
-    <insert id="insert" parameterType="UserDO">
-        insert into user_info (user_name, password, account)
-        values (#{userName},#{password},#{account})
+    <insert id="insert" parameterType="com.jw.tcly.test.mybatis.dto.UserDO">
+        insert into user_info (user_name, password, account, t_date, t_time, t_datetime, t_timestamp)
+        values (#{userName}, #{password}, #{account}, #{tDate}, #{tTime}, #{tDatetime}, #{tTimestamp})
     </insert>
     <!--<delete id="deleteById">-->
     <!--delete from user_info where id = #{id}-->
