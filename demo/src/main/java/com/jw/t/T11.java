@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
  */
 public class T11 {
     private static final Pattern JOB_REGEX = Pattern.compile("[a-zA-Z]|([a-zA-Z]+[\\w]*[a-zA-Z]+)");
+    private static final Pattern JOB_NAME_REGEX = Pattern.compile("[a-zA-Z]+[\\w]*");
 
     public static void main(String[] args) {
         String[] arr = {"a", "aa", "aaadddd", "aaa3ddd33fff", "0", "a9", "9a"};
@@ -22,7 +23,12 @@ public class T11 {
             boolean matches = JOB_REGEX.matcher(val).matches();
             System.out.println(String.format("val:%s,%s", val, matches));
         }
+        System.out.println("~~~~~~~~~ ~~~~~~~~~ ~~~~~~~~~");
 
+        for (String val : arr) {
+            boolean matches = JOB_NAME_REGEX.matcher(val).matches();
+            System.out.println(String.format("val:%s,%s", val, matches));
+        }
     }
 
 }
