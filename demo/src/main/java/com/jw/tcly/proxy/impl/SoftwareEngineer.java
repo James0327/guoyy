@@ -1,6 +1,6 @@
-package com.jw.tcly.test.proxy.impl;
+package com.jw.tcly.proxy.impl;
 
-import com.jw.tcly.test.proxy.Person;
+import com.jw.tcly.proxy.Person;
 
 /**
  * @Description: test com.tcly.test.proxy.impl.SoftwareEngineer

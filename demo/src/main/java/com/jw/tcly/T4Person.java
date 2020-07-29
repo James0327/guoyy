@@ -1,4 +1,4 @@
-package com.jw.tcly.test;
+package com.jw.tcly;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;

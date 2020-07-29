@@ -1,8 +1,8 @@
 package com.jw.test;
 
-import com.jw.tcly.test.proxy.Person;
-import com.jw.tcly.test.proxy.PersonInvocationhandler;
-import com.jw.tcly.test.proxy.impl.SoftwareEngineer;
+import com.jw.tcly.proxy.Person;
+import com.jw.tcly.proxy.PersonInvocationhandler;
+import com.jw.tcly.proxy.impl.SoftwareEngineer;
 import sun.misc.ProxyGenerator;
 
 import java.lang.reflect.Proxy;

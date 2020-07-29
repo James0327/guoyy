@@ -1,4 +1,4 @@
-package com.jw.tcly.test.mybatis;
+package com.jw.tcly.mybatis;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;

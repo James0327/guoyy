@@ -1,4 +1,4 @@
-package com.jw.tcly.test.proxy;
+package com.jw.tcly.proxy;
 
 /**
  * @Description: test com.tcly.test.proxy.Dog

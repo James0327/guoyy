@@ -1,4 +1,4 @@
-package com.jw.tcly.test.proxy;
+package com.jw.tcly.proxy;
 
 import net.sf.cglib.core.Signature;
 import net.sf.cglib.proxy.MethodInterceptor;

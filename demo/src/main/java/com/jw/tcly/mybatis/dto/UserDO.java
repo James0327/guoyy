@@ -1,4 +1,4 @@
-package com.jw.tcly.test.mybatis.dto;
+package com.jw.tcly.mybatis.dto;
 
 import lombok.Data;
 

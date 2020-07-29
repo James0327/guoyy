@@ -1,4 +1,4 @@
-package com.jw.tcly.test.proxy;
+package com.jw.tcly.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

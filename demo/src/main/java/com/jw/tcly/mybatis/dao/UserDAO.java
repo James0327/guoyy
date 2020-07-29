@@ -1,6 +1,6 @@
-package com.jw.tcly.test.mybatis.dao;
+package com.jw.tcly.mybatis.dao;
 
-import com.jw.tcly.test.mybatis.dto.UserDO;
+import com.jw.tcly.mybatis.dto.UserDO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 

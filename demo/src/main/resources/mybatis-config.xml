@@ -22,7 +22,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.jw.tcly.test.mybatis.dto"/>
+        <package name="com.jw.tcly.mybatis.dto"/>
     </typeAliases>
 
     <typeHandlers>
@@ -51,6 +51,7 @@
     <mappers>
         <!-- 使用相对于类路径的资源引用 -->
         <mapper resource="UserMapper.xml"/>
+        <mapper resource="Tbl186Mapper.xml"/>
         <!-- 使用完全限定资源定位符（URL） -->
         <!--<mapper url="file:///UserMapper.xml"/>-->
         <!-- 使用映射器接口实现类的完全限定类名 -->

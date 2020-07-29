@@ -1,8 +1,8 @@
 package com.jw.test;
 
-import com.jw.tcly.test.proxy.CglibMethodInterceptor;
-import com.jw.tcly.test.proxy.ConcreteClassFixedValue;
-import com.jw.tcly.test.proxy.Dog;
+import com.jw.tcly.proxy.CglibMethodInterceptor;
+import com.jw.tcly.proxy.ConcreteClassFixedValue;
+import com.jw.tcly.proxy.Dog;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.NoOp;

@@ -1,9 +1,26 @@
+server:
+  port: 8090
+  ssl:
+    enabled: true
+    protocol: TLS
+    key-alias: job-server
+    key-store: classpath:basedata.job.server.p12
+    key-store-password: basedata
+    key-store-type: JKS
+    client-auth: need
+    trust-store: classpath:basedata.job.server.p12
+    trust-store-password: basedata
+    trust-store-type: JKS
+    trust-store-provider: SUN
+
+debug: false
+
 logging:
+  # 默认文件
+  config: classpath:log4j2-spring.xml
   level:
     root: info
     org.reddison: info
-  # 默认文件
-  config: classpath:log4j2-spring.xml
 
 hbase:
   enable: true
@@ -13,7 +30,6 @@ hbase:
   zookeeper: locahost
   port: 2181
 
-debug: false
 spring:
   main:
     allow-bean-definition-overriding: true

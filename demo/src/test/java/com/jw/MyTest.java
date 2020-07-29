@@ -113,7 +113,8 @@ public class MyTest {
         int t = set;
         int idx = 1;
         while (true) {
-            if (t >> idx << idx == 0) {
+            System.out.println("t: " + t);
+            if (t >> idx == 0) {
                 break;
             }
             idx++;
