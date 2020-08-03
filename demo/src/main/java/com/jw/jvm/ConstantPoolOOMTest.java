@@ -26,11 +26,11 @@ public class ConstantPoolOOMTest {
      * run tiems: 134861
      * Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
      *
-     * java.lang.OutOfMemoryError: GC overhead limit exceeded
+     * java.lang.OutOfMemoryError: GC overhead limiter exceeded
      * Dumping heap to logs/java_pid62503.hprof ...
      * Heap dump file created [22758962 bytes in 0.128 secs]
      * run tiems: 152721
-     * Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limit exceeded
+     * Exception in thread "main" java.lang.OutOfMemoryError: GC overhead limiter exceeded
      */
     /**
      * 永久代溢出可以分为两种情况，第一种是常量池溢出，第二种是方法区溢出（方法区存放Class的相关信息，下面借助CGLib直接操作字节码，生成大量的动态类）。
