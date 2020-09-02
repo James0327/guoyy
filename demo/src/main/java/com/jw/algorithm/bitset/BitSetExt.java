@@ -13,6 +13,25 @@ import java.util.BitSet;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class BitSetExt {
+
+    public static void main(String[] args) {
+        BitSet bs = new BitSet(64);
+
+        System.out.println("cardinality: " + bs.cardinality());
+        System.out.println("size: " + bs.size());
+        System.out.println("length: " + bs.length());
+
+        bs.set(52);
+
+        System.out.println("cardinality: " + bs.cardinality());
+        System.out.println("size: " + bs.size());
+        System.out.println("length: " + bs.length());
+
+        for (int i = bs.nextSetBit(0); i >= 0; i = bs.nextSetBit(i + 1)) {
+            System.out.println("i: " + i);
+        }
+    }
+
     private BitSet lh = new BitSet();
     private BitSet ll = new BitSet();
     private BitSet i = new BitSet();

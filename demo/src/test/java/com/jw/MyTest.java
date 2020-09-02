@@ -1,9 +1,12 @@
 package com.jw;
 
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.BitSet;
+import java.util.List;
 
 /**
  * guoyy com.jw.demo
@@ -18,6 +21,19 @@ import java.util.BitSet;
 public class MyTest {
 
     public static void main(String[] args) {
+
+        List<String> arr = Lists.newArrayList();
+        arr.add(null);
+
+        System.out.println(JSON.toJSONString(arr));
+
+        System.exit(1);
+
+        int len = 9;
+        int sectors = (1 << len) - 1;
+
+        System.out.println("sectors: " + Integer.toBinaryString(sectors));
+
         java.time.format.DateTimeFormatter dateTimeFormat0 = java.time.format.DateTimeFormatter.ofPattern("yyyyMMddHH00");
         String date0 = java.time.LocalDateTime.now().minusHours(12).format(dateTimeFormat0);
         System.out.println(date0);
