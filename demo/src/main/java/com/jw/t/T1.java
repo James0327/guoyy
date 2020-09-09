@@ -2,11 +2,19 @@ package com.jw.t;
 
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -17,7 +25,34 @@ public class T1 {
 
     private static final Pattern PATTERN2 = Pattern.compile("(\\d+)(?:[PpCc]{2}|[Pp]|[Kk])$");
 
+    @Test
+    public void test() {
+        int a = 1;
+        int b = 2;
+        String c = "3";
+
+        System.out.println(a + b + c);
+    }
+
     public static void main(String[] args) {
+
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 2, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1024),
+                new BasicThreadFactory.Builder().namingPattern("xxx-%d").build(), (Runnable r, ThreadPoolExecutor e) -> {
+            String msg = String.format("Thread pool is EXHAUSTED! Thread Name: %s, Pool Size: %d (active: %d, core: %d, max: %d, largest: %d), Task: %d (completed: %d), Executor status:(isShutdown:%s, isTerminated:%s, isTerminating:%s)",
+                    "", e.getPoolSize(), e.getActiveCount(), e.getCorePoolSize(), e.getMaximumPoolSize(), e.getLargestPoolSize(), e.getTaskCount(), e.getCompletedTaskCount(), e.isShutdown(), e.isTerminated(), e.isTerminating());
+            throw new RejectedExecutionException(msg);
+        });
+        pool.submit(() -> {
+            System.out.println();
+            System.out.println();
+        });
+
+        Map<String, Object> map = new HashMap<>(11);
+        for (int i = 0; i < 12; i++) {
+            map.put("k" + i, new Object());
+        }
+        map.put("key", new Object());
+        map.remove("key");
 
         int a = 123;
         System.out.println(a * 4);

@@ -2,6 +2,9 @@ package com.jw;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+
 /**
  * guoyy com.jw.demo
  *
@@ -14,6 +17,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public final class Test1 {
+
+    public void test() throws Exception {
+
+        FileInputStream fis = new FileInputStream("file1");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        ois.readObject();
+
+    }
 
     private Test1() {
         System.out.println("Test1 ...");
