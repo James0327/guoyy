@@ -35,14 +35,14 @@ import java.util.stream.IntStream;
  */
 @State(Scope.Benchmark)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-@BenchmarkMode({Mode.SampleTime, Mode.AverageTime})
+@BenchmarkMode({/*Mode.SampleTime,*/ Mode.AverageTime})
 public class DemoJmhTest {
 
     public static void main(String[] args) throws RunnerException {
         Options build = new OptionsBuilder().include(DemoJmhTest.class.getSimpleName())
-                .warmupIterations(5)
+                .warmupIterations(3)
                 .measurementIterations(3)
-                .timeout(TimeValue.minutes(1))
+                .timeout(TimeValue.seconds(30))
                 // jmh-visual-chart支持上传JMH的JSON结果文件然后解析成图表
                 .result("demo_jmh_test.json")
                 .resultFormat(ResultFormatType.JSON)
@@ -50,9 +50,9 @@ public class DemoJmhTest {
         new Runner(build).run();
     }
 
-    private SingleStreamCal singleStreamCal;
-    private SingleThreadCal singleThreadCal;
-    private ParallelStreamCal parallelStreamCal;
+    private Calculator singleStreamCal;
+    private Calculator singleThreadCal;
+    private Calculator parallelStreamCal;
 
     @Param({"1000000", "10000000"})
     private int len;
