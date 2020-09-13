@@ -17,7 +17,8 @@ public class T {
     }
 
     public static void main(String[] args) {
-        MonitorAspect monitorAspect = new MonitorAspect();
+        MonitorAspect monitor = new MonitorAspect();
+        System.out.println(monitor.hashCode());
         new T().r();
     }
 

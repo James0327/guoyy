@@ -47,3 +47,19 @@ spring:
         - redis://10.100.45.10:10881
         - redis://10.100.45.14:10012
       max-redirects: 1
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: ACTUATOR_ADMIN
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
