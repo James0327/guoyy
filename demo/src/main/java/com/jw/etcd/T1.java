@@ -13,6 +13,8 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * guoyy com.jw.etcd
+ * <p>
+ * etcd 3.x 版本
  *
  * @Description: com.jw.etcd.T1
  * @Author: guoyiyong/james

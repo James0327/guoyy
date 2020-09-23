@@ -1,16 +1,20 @@
 package com.jw.t;
 
 import com.google.common.collect.ImmutableList;
+import org.apache.commons.collections4.list.TreeList;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -27,11 +31,31 @@ public class T1 {
 
     @Test
     public void test() {
+        Map<String, String> map = new TreeMap<>(Comparator.reverseOrder());
+        map.put("20", "CM");
+        map.put("240", "CM");
+        map.put("202", "CM");
+        map.put("201", "CM");
+
+        System.out.println(map);
+        map.forEach((k, v) -> System.out.println(String.format("k:%s, v:%s.", k, v)));
+
         int a = 1;
         int b = 2;
         String c = "3";
 
         System.out.println(a + b + c);
+
+        List list = new ArrayList();
+        list.add("20");
+        list.add("240");
+        list.add("202");
+        list.add("201");
+
+        Collections.sort(list, Comparator.reverseOrder());
+
+        String ret = StringUtils.join(list, "*");
+        System.out.println("ret: " + ret);
     }
 
     public static void main(String[] args) {

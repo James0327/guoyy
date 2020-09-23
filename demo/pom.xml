@@ -329,6 +329,23 @@
             <artifactId>etcd4j</artifactId>
             <version>2.18.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-provider</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-consumer</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

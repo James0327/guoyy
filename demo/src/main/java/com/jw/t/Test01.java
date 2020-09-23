@@ -20,6 +20,10 @@ public class Test01 {
 
     @Test
     public void test() {
+        Integer i = 128;
+
+        System.out.println(i.equals(128));
+
         _1();
     }
 

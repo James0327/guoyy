@@ -9,6 +9,8 @@ import java.net.URI;
 
 /**
  * guoyy com.jw.etcd
+ * <p>
+ * etcd 2.x 版本
  *
  * @Description: com.jw.etcd.T2
  * @Author: guoyiyong/james

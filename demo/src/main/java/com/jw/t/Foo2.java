@@ -28,6 +28,7 @@ public class Foo2 {
 
     public void one() {
         System.out.println("one");
+        s2.release();
     }
 
     public void two() {
