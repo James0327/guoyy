@@ -1,5 +1,6 @@
 package com.jw.t;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
@@ -20,6 +21,14 @@ public class Test01 {
 
     @Test
     public void test() {
+        String str = null;
+        if (str instanceof String) {
+            System.out.println("str: " + str);
+        }
+        System.out.println(JSON.toJSONString(str));
+
+        System.exit(1);
+
         Integer i = 128;
 
         System.out.println(i.equals(128));

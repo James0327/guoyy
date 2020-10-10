@@ -1,7 +1,7 @@
 package com.jw.t;
 
 import com.google.common.collect.ImmutableList;
-import org.apache.commons.collections4.list.TreeList;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.jupiter.api.Test;
@@ -12,8 +12,10 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
@@ -28,6 +30,28 @@ public class T1 {
     private static final Pattern PATTERN = Pattern.compile("^[\\d]+$");
 
     private static final Pattern PATTERN2 = Pattern.compile("(\\d+)(?:[PpCc]{2}|[Pp]|[Kk])$");
+
+    @Test
+    public void test1() {
+        Random r = new Random();
+        Map<Long, String> map = Maps.newLinkedHashMap();
+        for (int i = 0; i < 10; i++) {
+            map.put(new Long(i), Long.toString(r.nextLong()));
+        }
+
+        Iterator<Map.Entry<Long, String>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Long, String> entry = iterator.next();
+            Long k = entry.getKey();
+            String v = entry.getValue();
+            if (k == 3 || k == 6) {
+                iterator.remove();
+            }
+            System.out.println(String.format("k:%s, v:%s.", k, v));
+        }
+
+        System.out.println(map);
+    }
 
     @Test
     public void test() {
