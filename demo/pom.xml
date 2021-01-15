@@ -158,6 +158,11 @@
             <version>2.10.3</version>
         </dependency>
         <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>2.10.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.lz4</groupId>
             <artifactId>lz4-java</artifactId>
             <version>1.7.1</version>
@@ -344,6 +349,30 @@
             <groupId>com.jw</groupId>
             <artifactId>demo-consumer</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>4.5.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ly.flight</groupId>
+            <artifactId>atpco-core-model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.ly.flight</groupId>
+                    <artifactId>atpco-common-agency</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.ly.ie.ibbdms</groupId>
+                    <artifactId>ibbdms-data-client</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>

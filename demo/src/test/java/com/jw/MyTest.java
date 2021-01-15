@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.BitSet;
 import java.util.List;
 
@@ -21,6 +22,21 @@ import java.util.List;
 public class MyTest {
 
     public static void main(String[] args) {
+
+        BigDecimal bd1 = new BigDecimal(1);
+        BigDecimal bd2 = new BigDecimal(2);
+
+        BigDecimal bd3 = bd1.add(bd2);
+
+        System.out.println(String.format("%s, %s, %s.", bd1, bd2, bd3));
+
+        String dictString1 = "YQI";
+        String key1 = dictString1.substring(0, 2);
+
+        String dictString2 = "001CN";
+        String key2 = dictString2.substring(dictString2.length() - 2);
+
+        System.out.println(String.format("%s, %s.", key1, key2));
 
         List<String> arr = Lists.newArrayList();
         arr.add(null);

@@ -8,6 +8,7 @@ import com.jw.dto.Person;
 import net.oschina.j2cache.J2CacheBuilder;
 import net.oschina.j2cache.J2CacheConfig;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -36,6 +41,57 @@ import java.util.stream.Stream;
  * @Version: 1.0
  */
 public class TT1 {
+
+    @Test
+    public void test3() {
+
+        ArrayList<String> list = Lists.newArrayListWithCapacity(128);
+
+        List<String> subList = list.subList(0, 1);
+
+        subList= Lists.newArrayList(subList);
+        System.out.println(subList);
+
+        List<String> subList2 = list.stream().skip(1).limit(5).collect(Collectors.toList());
+        System.out.println(subList2);
+
+    }
+
+    @Test
+    public void test2() {
+
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(1),
+                new BasicThreadFactory.Builder().namingPattern("xxx-xxx-%d").build(),
+                new ThreadPoolExecutor.AbortPolicy());
+        pool.execute(() -> {
+            Thread thread = Thread.currentThread();
+            System.out.println(thread);
+        });
+
+        Thread thread = new Thread(() -> {
+            int cnt = 0;
+            while (true) {
+                System.out.println("park " + Thread.currentThread().getName());
+                LockSupport.park();
+                // do something
+                cnt++;
+                System.out.println(Thread.currentThread().getName() + " exec / " + cnt);
+
+                LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
+                LockSupport.unpark(Thread.currentThread());
+            }
+        });
+        thread.start();
+
+        for (int i = 0; i < 1; i++) {
+            LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
+            System.out.println("unpark thread: " + thread.getName());
+            LockSupport.unpark(thread);
+        }
+
+        LockSupport.park();
+    }
 
     private ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 

@@ -52,6 +52,8 @@ spring:
       name: actuator
       password: actuator
       roles: ACTUATOR_ADMIN
+  profiles:
+    include: basedata
 
 management:
   endpoint:

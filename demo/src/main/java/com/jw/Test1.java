@@ -1,9 +1,16 @@
 package com.jw;
 
+import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDate;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.BitSet;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * guoyy com.jw.demo
@@ -18,7 +25,37 @@ import java.io.ObjectInputStream;
 @Slf4j
 public final class Test1 {
 
+    @Data
+    class T {
+        private int age;
+        private String name;
+    }
+
+    public static void main(String[] args) throws Exception {
+
+        Test1 test1 = new Test1();
+
+        Date startTime = new Date();
+
+        Date date = LocalDate.fromDateFields(startTime).toDate();
+
+        System.out.println(date);
+
+        List<T> list = Lists.newArrayList();
+        list.add(test1.new T());
+        list.add(test1.new T());
+        list.add(test1.new T());
+
+        list.stream().collect(Collectors.toMap(T::getAge, T::getName));
+
+        test1.test();
+    }
+
     public void test() throws Exception {
+
+        BitSet bs = new BitSet();
+        boolean b = bs.get(9);
+        System.out.println(b);
 
         FileInputStream fis = new FileInputStream("file1");
         ObjectInputStream ois = new ObjectInputStream(fis);

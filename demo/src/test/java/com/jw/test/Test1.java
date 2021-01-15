@@ -1,11 +1,17 @@
 package com.jw.test;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.ly.flight.atpco.core.model.routingmap.RouteComboVO;
 import com.ning.compress.lzf.LZFDecoder;
 import com.ning.compress.lzf.LZFEncoder;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.LinkedHashMap;
@@ -149,6 +155,20 @@ public class Test1 {
                 System.out.println(String.format("%s-%s->%s", start, tailMap.values().stream().collect(Collectors.toSet()), end));
             }
         }
+
+    }
+
+    @Test
+    public void test3() throws IOException {
+        String json = FileUtils.readFileToString(new File(this.getClass().getClassLoader()
+                .getResource("json/RouteComboVO-OW-LAX_PAR_20201029.json").getFile()));
+
+        Type type = new TypeReference<List<RouteComboVO>>() {}.getType();
+        System.out.println(type);
+
+        List<RouteComboVO> routeComboVOS = JSON.parseArray(json, RouteComboVO.class);
+
+        System.out.println(routeComboVOS);
 
     }
 
