@@ -1,4 +1,4 @@
-package com.jw.bridge;
+package com.jw.pattern.bridge;
 
 /**
  * guoyy com.jw.pattern.bridge

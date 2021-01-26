@@ -1,7 +1,7 @@
-package com.jw.bridge.sub;
+package com.jw.pattern.bridge.sub;
 
-import com.jw.bridge.Shape;
-import com.jw.bridge.Color;
+import com.jw.pattern.bridge.Shape;
+import com.jw.pattern.bridge.Color;
 
 /**
  * guoyy com.jw.pattern.bridge.sub

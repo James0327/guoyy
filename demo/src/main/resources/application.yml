@@ -54,6 +54,8 @@ spring:
       roles: ACTUATOR_ADMIN
   profiles:
     include: basedata
+  aop:
+    proxy-target-class: true
 
 management:
   endpoint:

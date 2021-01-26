@@ -22,7 +22,6 @@ import java.util.List;
 public class MyTest {
 
     public static void main(String[] args) {
-
         BigDecimal bd1 = new BigDecimal(1);
         BigDecimal bd2 = new BigDecimal(2);
 

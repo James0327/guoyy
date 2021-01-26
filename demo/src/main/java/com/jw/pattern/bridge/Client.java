@@ -1,8 +1,8 @@
-package com.jw.bridge;
+package com.jw.pattern.bridge;
 
-import com.jw.bridge.impl.Gray;
-import com.jw.bridge.impl.White;
-import com.jw.bridge.sub.Circle;
+import com.jw.pattern.bridge.impl.Gray;
+import com.jw.pattern.bridge.impl.White;
+import com.jw.pattern.bridge.sub.Circle;
 
 /**
  * guoyy com.jw.pattern.bridge

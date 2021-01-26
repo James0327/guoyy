@@ -1,4 +1,4 @@
-package com.jw.singleton;
+package com.jw.pattern.singleton;
 
 import java.io.Serializable;
 
