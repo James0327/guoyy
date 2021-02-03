@@ -41,8 +41,8 @@ public class JmhStringIntegerTest {
     /**
      * Benchmark                     (len)  Mode  Cnt       Score        Error  Units
      * JmhStringIntegerTest.iVal   1000000  avgt    3    6367.693 ±    591.167  us/op
-     * JmhStringIntegerTest.iVal  10000000  avgt    3   65795.010 ±  15292.617  us/op
      * JmhStringIntegerTest.sVal   1000000  avgt    3   31627.384 ±   8038.054  us/op
+     * JmhStringIntegerTest.iVal  10000000  avgt    3   65795.010 ±  15292.617  us/op
      * JmhStringIntegerTest.sVal  10000000  avgt    3  324051.305 ± 128249.746  us/op
      */
     public static void main(String[] args) throws RunnerException {
