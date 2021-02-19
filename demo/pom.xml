@@ -12,11 +12,32 @@
     <name>demo</name>
 
     <properties>
-        <java.version>1.8</java.version>
         <jmh.version>1.22</jmh.version>
+        <spring.statemachine.core.version>2.2.0.RELEASE</spring.statemachine.core.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>hbase-spring-boot-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-provider</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jw</groupId>
+            <artifactId>demo-consumer</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -79,7 +100,7 @@
         <dependency>
             <groupId>org.springframework.statemachine</groupId>
             <artifactId>spring-statemachine-core</artifactId>
-            <version>2.2.0.RELEASE</version>
+            <version>${spring.statemachine.core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -224,7 +245,7 @@
         <dependency>
             <groupId>com.ly.dal</groupId>
             <artifactId>dal-new</artifactId>
-            <version>3.5.3</version>
+            <version>3.5.8</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -254,7 +275,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -264,7 +284,7 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.4.1</version>
+            <version>4.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -317,11 +337,6 @@
             <version>1.5.4</version>
         </dependency>
         <dependency>
-            <groupId>com.jw</groupId>
-            <artifactId>hbase-spring-boot-starter</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
             <version>3.6.1</version>
@@ -343,21 +358,6 @@
             <version>2.12.1</version>
         </dependency>
         <dependency>
-            <groupId>com.jw</groupId>
-            <artifactId>demo-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jw</groupId>
-            <artifactId>demo-provider</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jw</groupId>
-            <artifactId>demo-consumer</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>net.sourceforge.tess4j</groupId>
             <artifactId>tess4j</artifactId>
             <version>4.5.4</version>
@@ -365,7 +365,7 @@
         <dependency>
             <groupId>com.ly.flight</groupId>
             <artifactId>atpco-core-model</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0.RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>log4j</artifactId>

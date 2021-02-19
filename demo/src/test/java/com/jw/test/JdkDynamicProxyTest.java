@@ -32,7 +32,7 @@ public class JdkDynamicProxyTest {
         Person person = new SoftwareEngineer("James");
         PersonInvocationhandler<Person> handler = new PersonInvocationhandler<>(person);
 
-        Person personProxy = (Person) Proxy.newProxyInstance(Person.class.getClassLoader(), new Class[]{Person.class}, handler);
+        Person personProxy = (Person)Proxy.newProxyInstance(Person.class.getClassLoader(), new Class[]{Person.class}, handler);
 
         personProxy.goWorking(personProxy.getName(), "XXXXXX");
 
