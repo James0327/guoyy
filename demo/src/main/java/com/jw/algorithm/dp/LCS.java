@@ -1,9 +1,9 @@
 package com.jw.algorithm.dp;
 
-import org.junit.jupiter.api.Test;
-
 /**
  * guoyy com.jw.algorithm.dp
+ * <p>
+ * 最长公共子序列（longest common subsequence，LCS）
  *
  * @Description: com.jw.algorithm.dp.LCS
  * @Author: guoyiyong/james
@@ -14,17 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 public class LCS {
 
-    @Test
-    public void test() {
-        char[] l = "BDCABA".toCharArray();
-        char[] s = "ABCBDAB".toCharArray();
-
-        char[] ret = new char[l.length > s.length ? l.length : s.length];
-        int max = lcs(ret, 0, l, l.length - 1, s, s.length - 1);
-        System.out.println(String.format("max:%s, ret:%s", max, new String(ret)));
-    }
-
-    private int lcs(char[] ret, int idx, char[] l, int i, char[] s, int j) {
+    public int lcs(char[] ret, int idx, char[] l, int i, char[] s, int j) {
         if (i == -1 || j == -1) {
             return 0;
         }
