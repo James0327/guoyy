@@ -52,7 +52,8 @@ public class T4SimpleExt {
         String echo3 = simpleExt.yell(url3, "haha");
         assertEquals("Ext1Impl2-yell", echo3);
 
-        url3 = url3.addParameter("key1", "impl3"); // note: URL is value's type
+        // note: URL is value's type
+        url3 = url3.addParameter("key2", "impl3");
         echo3 = simpleExt.yell(url3, "haha");
         assertEquals("Ext1Impl3-yell", echo3);
     }

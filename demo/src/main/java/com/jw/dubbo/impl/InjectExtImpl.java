@@ -23,6 +23,7 @@ public class InjectExtImpl implements InjectExt {
         return simpleExt;
     }
 
+    @DisableInject
     public void setSimpleExt(SimpleExt simpleExt) {
         this.simpleExt = simpleExt;
     }
@@ -31,9 +32,8 @@ public class InjectExtImpl implements InjectExt {
         return simpleExt1;
     }
 
-    @DisableInject
-    public void setSimpleExt1(SimpleExt simpleExt1) {
-        this.simpleExt1 = simpleExt1;
+    public void setSimpleExt1(SimpleExt simpleExt) {
+        this.simpleExt1 = simpleExt;
     }
 
     public Object getGenericType() {

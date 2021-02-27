@@ -20,7 +20,6 @@ public class AsynConsumer {
         ReferenceConfig<HelloService> config = new ReferenceConfig<>();
         config.setApplication(new ApplicationConfig(""));
 
-
     }
 
 }
