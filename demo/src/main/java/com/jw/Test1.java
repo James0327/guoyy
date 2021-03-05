@@ -2,6 +2,7 @@ package com.jw;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDate;
@@ -34,6 +35,31 @@ public final class Test1 {
     }
 
     public static void main(String[] args) throws Exception {
+
+        int cardinality = 99;
+        int batch = 100;
+
+        int cnt = cardinality / (cardinality / batch + 1) + 1;
+
+        System.out.println("cnt: " + cnt);
+
+        List<List<Integer>> requestList = Lists.newArrayList();
+        List<Integer> atpcoMsgs = Lists.newArrayList();
+        requestList.add(atpcoMsgs);
+        int maxCnt = 50, idxCnt = 0;
+        for (int i = 0; i < 101; i++) {
+            atpcoMsgs.add(i);
+            idxCnt++;
+            if (idxCnt % maxCnt == 0) {
+                atpcoMsgs = Lists.newArrayList();
+                requestList.add(atpcoMsgs);
+            }
+        }
+        System.out.println("requestList: " + requestList);
+
+        Map<String, Object> cache = Maps.newHashMap();
+        Object o = cache.get(null);
+        System.out.println(o);
 
         String json = "{\"0-30\":10,\"30-100\":20,\"500-999999\":30}";
         Map<String, Integer> map = JSON.parseObject(json, Map.class);

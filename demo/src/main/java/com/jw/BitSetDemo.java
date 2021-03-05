@@ -50,7 +50,7 @@ public class BitSetDemo {
             int size = used.size();
             for (int i = 0; i < size; i++) {
                 if (used.get(i)) {
-                    strB.append((char) i);
+                    strB.append((char)i);
                 }
             }
             strB.append("]");
@@ -67,14 +67,14 @@ public class BitSetDemo {
             for (int i = 2; i < size; i++) {
                 sieve.set(i);
             }
-            int finalBit = (int) Math.sqrt(sieve.size());
+            int finalBit = (int)Math.sqrt(sieve.size());
 
             for (int i = 2; i < finalBit; i++) {
                 if (sieve.get(i)) {
                     // 去除 i 的倍数
-//                    for (int j = 2 * i; j < size; j += i) {
-//                        sieve.clear(j);
-//                    }
+                    //                    for (int j = 2 * i; j < size; j += i) {
+                    //                        sieve.clear(j);
+                    //                    }
                     for (int j = 2, len = size / i; j < len; j++) {
                         sieve.clear(j * i);
                     }
@@ -115,11 +115,11 @@ public class BitSetDemo {
             // that occurs on or after the specified starting index. If no such
             // bit exists then {@code -1} is returned.
 
-//            int k = 0;
-//            for (int i = bitSet.nextSetBit(0); i >= 0; i = bitSet.nextSetBit(i + 1)) {
-//                System.out.println("bitSet.nextSetBit(" + i + ")=>" + bitSet.nextSetBit(i));
-//                orderedArr[k++] = i;
-//            }
+            //            int k = 0;
+            //            for (int i = bitSet.nextSetBit(0); i >= 0; i = bitSet.nextSetBit(i + 1)) {
+            //                System.out.println("bitSet.nextSetBit(" + i + ")=>" + bitSet.nextSetBit(i));
+            //                orderedArr[k++] = i;
+            //            }
 
             int rIdx = 0, wIdx = 0;
             while (true) {
@@ -141,9 +141,11 @@ public class BitSetDemo {
                 System.out.print(i + "\t");
             }
             System.out.println("---------------------------");
+            System.out.println("bitSet.size: " + bitSet.size());
+            System.out.println("bitSet.length: " + bitSet.length());
+            System.out.println("bitSet.cardinality: " + bitSet.cardinality());
         }
 
     }
-
 
 }
