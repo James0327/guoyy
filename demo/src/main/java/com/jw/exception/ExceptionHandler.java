@@ -11,5 +11,10 @@ package com.jw.exception;
  * Copyright (C) 2021 JW All rights reserved.
  */
 public interface ExceptionHandler {
+    /**
+     *
+     * @param request
+     * @return
+     */
     Object exec(Object[] request);
 }

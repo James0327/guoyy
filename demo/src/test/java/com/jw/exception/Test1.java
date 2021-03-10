@@ -27,9 +27,17 @@ public class Test1 {
     private Foo foo;
 
     @Test
-    public void test() throws Throwable {
+    public void test1() {
         foo.fire();
+    }
 
+    @Test
+    public void test2() throws Exception {
+        foo.fire2();
+    }
+
+    @Test
+    public void test() throws Throwable {
         // Set the max attempts including the initial attempt before retrying
         // and retry on all exceptions (this is the default):
         SimpleRetryPolicy policy = new SimpleRetryPolicy(5, Collections.singletonMap(Exception.class, true));
@@ -40,7 +48,7 @@ public class Test1 {
         template.execute(new RetryCallback<Foo, Throwable>() {
             public Foo doWithRetry(RetryContext context) {
                 // business logic here
-                return null ;
+                return null;
             }
         });
 

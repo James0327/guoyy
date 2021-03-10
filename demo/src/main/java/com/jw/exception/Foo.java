@@ -22,4 +22,10 @@ public class Foo {
         throw new RuntimeException();
     }
 
+    @TaxbagException(throwable = Exception.class, handler = ExceptionHandler.class)
+    public void fire2() throws Exception {
+        System.out.println("fire ... " + System.currentTimeMillis());
+        throw new Exception();
+    }
+
 }

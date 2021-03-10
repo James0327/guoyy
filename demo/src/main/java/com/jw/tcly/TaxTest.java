@@ -20,6 +20,27 @@ import java.util.List;
  * @Version: 1.0
  */
 public class TaxTest {
+
+    @Test
+    public void test11() {
+        //        String json1 = "dme-lh-fra/fra-lh-she@2";
+        String json1 = "nkg-lh-fra/fra-lh-kbp|kbp-lh-fra/fra-lh-nkg@222";
+        char[] chs = new char[6];
+        json1.getChars(0, 3, chs, 0);
+
+        int idx = json1.indexOf("|");
+        if (idx > -1) {
+            json1.getChars(idx - 3, idx, chs, 3);
+        } else {
+            int endIdx = json1.indexOf("@");
+            json1.getChars(endIdx - 3, endIdx, chs, 3);
+        }
+        System.out.println(new String(chs));
+
+        String[] arr = json1.split("[\\|/]");
+        System.out.println(arr);
+    }
+
     @Setter
     @Getter
     class T1 implements Serializable {

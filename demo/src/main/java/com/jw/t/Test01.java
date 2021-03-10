@@ -37,7 +37,6 @@ public class Test01 {
     }
 
     public void _1() {
-
         String str = "sha-ca,ca-lax/lax-aa,aa-bjs";
 
         Matcher matcher = compile.matcher(str);
