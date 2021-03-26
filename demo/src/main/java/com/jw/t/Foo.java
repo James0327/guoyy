@@ -1,5 +1,10 @@
 package com.jw.t;
 
+import org.apache.commons.collections.MapUtils;
+import org.joda.time.LocalDate;
+
+import java.util.NavigableMap;
+import java.util.TreeMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -22,6 +27,29 @@ public class Foo {
     private volatile int idx = 1;
 
     public static void main(String[] args) {
+        LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int monthOfYear = now.getMonthOfYear();
+        System.out.println("year:" + year);
+        System.out.println("monthOfYear:" + monthOfYear);
+
+        TreeMap<Integer, Integer> cache = new TreeMap<>();
+        cache.put(3, 1);
+        cache.put(6, 2);
+        cache.put(9, 3);
+        cache.put(12, 4);
+
+        for (int i = 1; i <= 12; i++) {
+            NavigableMap<Integer, Integer> submap = cache.headMap(i, true);
+            if (MapUtils.isEmpty(submap)) {
+                System.out.println(i + "/" + 1);
+                continue;
+            }
+            Integer q = submap.lastEntry().getValue();
+            System.out.println(i + "/" + q);
+        }
+        System.out.println();
+
         Foo foo = new Foo();
         new Thread(() -> {
             for (int i = 0; i < 99; i++) {

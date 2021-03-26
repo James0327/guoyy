@@ -1,12 +1,15 @@
 package com.jw.t;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONValidator;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.collect.Lists;
 import com.jw.dto.Person;
 import net.oschina.j2cache.J2CacheBuilder;
 import net.oschina.j2cache.J2CacheConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -43,13 +46,25 @@ import java.util.stream.Stream;
 public class TT1 {
 
     @Test
-    public void test3() {
+    public void test4() {
+        final String json = "{}";
+        boolean validate = JSONValidator.from(json).validate();
+        boolean starts = StringUtils.startsWith(json, "[");
+        boolean ends = StringUtils.endsWith(json, "]");
 
+        System.out.println(String.format("validate:%s, starts:%s, ends:%s.", validate, starts, ends));
+
+        List<JSONObject> objs = JSONObject.parseObject(json, List.class);
+        System.out.println(objs);
+    }
+
+    @Test
+    public void test3() {
         ArrayList<String> list = Lists.newArrayListWithCapacity(128);
 
         List<String> subList = list.subList(0, 1);
 
-        subList= Lists.newArrayList(subList);
+        subList = Lists.newArrayList(subList);
         System.out.println(subList);
 
         List<String> subList2 = list.stream().skip(1).limit(5).collect(Collectors.toList());

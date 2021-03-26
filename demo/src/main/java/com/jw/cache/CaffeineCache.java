@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @Description: test CaffeineCache
@@ -29,8 +30,9 @@ public class CaffeineCache {
     public static void main(String[] args) {
         Cache<String, Person> cache = Caffeine.newBuilder()
                 .maximumSize(100_0000)
-                .expireAfterWrite(5, TimeUnit.MINUTES)
-                .build();
+                // .expireAfterWrite(5, TimeUnit.MINUTES)
+                .refreshAfterWrite(5, TimeUnit.SECONDS)
+                .build(k -> load(k));
 
         String key = "James";
 
@@ -47,7 +49,11 @@ public class CaffeineCache {
 
         cache.invalidate(key);
         Person person1 = cache.getIfPresent(key);
-        System.out.println(JSON.toJSONString(person1));
+        System.out.println("person1:" + JSON.toJSONString(person1));
+        LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(6L));
+        Person person2 = cache.getIfPresent(key);
+        cache.get(key, k -> load(k));
+        System.out.println("person2:" + JSON.toJSONString(person2));
 
         try {
             Kryo kryo = new Kryo();
@@ -66,6 +72,13 @@ public class CaffeineCache {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
 
+    private static Person load(String k) {
+        Person p = new Person();
+        p.setName("name" + k);
+        p.setAge(18);
+        p.setAddr("addr");
+        return p;
     }
 }

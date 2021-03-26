@@ -5,14 +5,19 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.BitSet;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +39,38 @@ public final class Test1 {
         private String name;
     }
 
+    private static void t() {
+        String date = String.format("%04d-%02d", 110, 3);
+        System.out.println("date: " + date);
+
+        int millisOfDay = LocalTime.now().getMillisOfDay();
+        long l = TimeUnit.DAYS.toMillis(1);
+        System.out.println(String.format("millisOfDay:%s, l:%s.", millisOfDay, l));
+
+        Date currentDate = new Date();
+        Calendar calendar = new Calendar.Builder().setInstant(currentDate).build();
+        Calendar instance = Calendar.getInstance();
+        calendar.setTime(currentDate);
+
+        long changeAmt = -8800;
+
+        String json = "{\"0~30\":-1,\"-30~-500\":120,\"-500~-999999999\":240}";
+        Map<String, Integer> expireTimeMap = JSON.parseObject(json, Map.class);
+        Iterator<String> iterator = expireTimeMap.keySet().iterator();
+        while (iterator.hasNext()) {
+            String k = iterator.next();
+            String[] arr = StringUtils.split(StringUtils.replace(k, " ", ""), "~");
+            if (Long.parseLong(arr[0]) <= changeAmt && changeAmt < Long.parseLong(arr[1])) {
+                System.out.println(Boolean.TRUE);
+                return;
+            }
+        }
+        System.out.println(Boolean.FALSE);
+    }
+
     public static void main(String[] args) throws Exception {
+        t();
+        System.exit(1);
 
         int cardinality = 99;
         int batch = 100;

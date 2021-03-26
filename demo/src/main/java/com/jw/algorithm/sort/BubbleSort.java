@@ -25,9 +25,12 @@ public class BubbleSort {
         for (int i = 0, len = arr.length; i < len; i++) {
             for (int j = i + 1; j < len; j++) {
                 if (arr[j] < arr[i]) {
-                    int tmp = arr[j];
+                    /*int tmp = arr[j];
                     arr[j] = arr[i];
-                    arr[i] = tmp;
+                    arr[i] = tmp;*/
+                    arr[i] = arr[i] ^ arr[j];
+                    arr[j] = arr[i] ^ arr[j];
+                    arr[i] = arr[i] ^ arr[j];
                 }
             }
         }
