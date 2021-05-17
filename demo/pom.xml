@@ -293,7 +293,7 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.8.1</version>
+            <version>4.9.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -310,8 +310,7 @@
             <artifactId>tools</artifactId>
             <version>${java.version}</version>
             <scope>system</scope>
-            <!--<systemPath>D:/Program Files/Java/jdk1.8.0_111/lib/tools.jar</systemPath>-->
-            <systemPath>/Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/lib/tools.jar</systemPath>
+            <systemPath>/Library/Java/JavaVirtualMachines/java8/Contents/Home/lib/tools.jar</systemPath>
         </dependency>
 
         <dependency>

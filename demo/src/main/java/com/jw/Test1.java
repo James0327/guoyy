@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * guoyy com.jw.demo
@@ -33,13 +35,34 @@ import java.util.stream.Collectors;
 @Slf4j
 public final class Test1 {
 
+    public Test1() {
+        System.out.println("Test1 ...");
+    }
+
     @Data
     class T {
         private int age;
         private String name;
     }
 
-    private static void t() {
+    enum E {
+        A, B
+    }
+
+    @Test
+    public void t() {
+        Map<String, String> map = Maps.newConcurrentMap();
+        for (int i = 0; i < 10; i++) {
+            map.put("key-" + i, "value-" + i);
+        }
+        String[] arr0 = map.entrySet().stream().flatMap(e -> Stream.of(e.getKey(), e.getValue())).toArray(String[]::new);
+        System.out.println("arr: " + arr0);
+
+        E e = null;
+        if (e == E.A) {
+            System.out.println("XXX");
+        }
+
         String date = String.format("%04d-%02d", 110, 3);
         System.out.println("date: " + date);
 
@@ -51,6 +74,7 @@ public final class Test1 {
         Calendar calendar = new Calendar.Builder().setInstant(currentDate).build();
         Calendar instance = Calendar.getInstance();
         calendar.setTime(currentDate);
+        System.out.println(instance);
 
         long changeAmt = -8800;
 
@@ -69,7 +93,6 @@ public final class Test1 {
     }
 
     public static void main(String[] args) throws Exception {
-        t();
         System.exit(1);
 
         int cardinality = 99;
@@ -134,10 +157,6 @@ public final class Test1 {
 
         ois.readObject();
 
-    }
-
-    private Test1() {
-        System.out.println("Test1 ...");
     }
 
     private enum Singleton {

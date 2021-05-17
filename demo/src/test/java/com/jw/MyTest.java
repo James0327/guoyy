@@ -2,12 +2,15 @@ package com.jw;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Map;
 
 /**
  * guoyy com.jw.demo
@@ -21,7 +24,45 @@ import java.util.List;
  */
 public class MyTest {
 
+    @Test
+    public void test() {
+        Map<String, Map<String, Long>> cache = Maps.newConcurrentMap();
+        cache.computeIfAbsent("OD", k -> Maps.newConcurrentMap()).put("fareId", 1L);
+
+        System.out.println(cache.toString());
+        System.out.println(ToStringBuilder.reflectionToString(cache));
+
+        boolean yq = isYq("YQI112.50EUR");
+
+        System.out.println("yq: " + yq);
+    }
+
+    /**
+     * YQI YQF YRI YRF
+     *
+     * @param s
+     * @return
+     */
+    private boolean isYq(String s) {
+        char ch = s.charAt(0);
+        if (ch == 'Y') {
+            ch = s.charAt(1);
+            if (ch == 'Q' || ch == 'R') {
+                ch = s.charAt(2);
+                if (ch == 'I' || ch == 'F') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
+        int n1 = 1;
+        int d2 = 3;
+
+        System.out.println((double)n1 / d2);
+
         BigDecimal bd1 = new BigDecimal(1);
         BigDecimal bd2 = new BigDecimal(2);
 

@@ -1,5 +1,13 @@
 package com.jw.aspect;
 
+import com.jw.GuoyyApplication;
+import com.jw.dto.Foo;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
+
 /**
  * test com.jw.aspect
  *
@@ -9,17 +17,21 @@ package com.jw.aspect;
  * @Version: 1.0
  * Copyright (C) 2020 JW All rights reserved.
  */
+@Slf4j
+@SpringBootTest(classes = GuoyyApplication.class)
 public class T {
+    @Resource
+    private ServerA serverA;
 
-    @Monitor
-    public void r() {
-        System.out.println("running is here [r].");
-    }
+    @Test
+    public void test1() {
+        Foo foo = new Foo();
+        foo.setTraceId("xxx");
+        foo.setId(1L);
+        foo.setDesc("测试");
+        foo.setRemark("remark");
 
-    public static void main(String[] args) {
-        MonitorAspect monitor = new MonitorAspect();
-        System.out.println(monitor.hashCode());
-        new T().r();
+        serverA.method1(foo);
     }
 
 }

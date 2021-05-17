@@ -29,7 +29,6 @@ public class LruCache2<K, V> extends LinkedHashMap<K, V> {
     }
 
     public static void main(String[] args) {
-
         LruCache2<Integer, Integer> cache = new LruCache2<>(3);
         cache.put(1, 1);
         System.out.println(JSON.toJSONString(cache));

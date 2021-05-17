@@ -5,6 +5,7 @@ import org.objectweb.asm.ClassWriter;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.URL;
 
 /**
  * guoyy com.jw.bytecode.asm
@@ -29,7 +30,8 @@ public class Generator {
         classReader.accept(classVisitor, ClassReader.SKIP_DEBUG);
 
         byte[] bytes = classWriter.toByteArray();
-        File f = new File("target/classes/com/jw/bytecode/asm/Base.class");
+        URL resource = Generator.class.getClassLoader().getResource("");
+        File f = new File(resource.getPath(), "com/jw/bytecode/asm/Base.class");
         FileOutputStream fos = new FileOutputStream(f);
         fos.write(bytes);
         fos.close();

@@ -18,7 +18,10 @@ public class StrongBytecode {
 
     public static void main(String[] args) throws Exception {
         ClassPool classPool = ClassPool.getDefault();
-        CtClass cc = classPool.get("Base");
+        CtClass cc = classPool.get("com.jw.bytecode.javassist.Base");
+        if (cc.isFrozen()) {
+            cc.defrost();
+        }
         CtMethod m = cc.getDeclaredMethod("process");
         m.insertBefore("{System.out.println(\"start\");}");
         m.insertAfter("{System.out.println(\"end\");}");

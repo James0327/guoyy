@@ -1,11 +1,14 @@
 package com.jw.aspect;
 
+import com.alibaba.fastjson.JSON;
+import com.jw.dto.Foo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
 
 /**
  * test com.jw.aspect
@@ -17,18 +20,21 @@ import org.aspectj.lang.reflect.MethodSignature;
  * Copyright (C) 2020 JW All rights reserved.
  */
 @Aspect
+@Component
 public class MonitorAspect {
 
-    @Around("@annotation(monitor)")
-    private Object monitor(ProceedingJoinPoint jointPoint, Monitor monitor) throws Throwable {
+    @Around("@annotation(monitor) && args(foo)")
+    private Object monitor(ProceedingJoinPoint jointPoint, Foo foo, Monitor monitor) throws Throwable {
+        System.out.println(JSON.toJSONString(foo));
+        System.out.println(JSON.toJSONString(monitor));
 
-        Class<?> clazz = jointPoint.getTarget().getClass();
-        MethodSignature signature = (MethodSignature) jointPoint.getSignature();
+        MethodSignature signature = (MethodSignature)jointPoint.getSignature();
 
         Object[] args = jointPoint.getArgs();
         String[] parameterNames = signature.getParameterNames();
         Class[] parameterTypes = signature.getParameterTypes();
 
+        Class<?> clazz = jointPoint.getTarget().getClass();
         System.out.println(clazz.getSimpleName() + "][" + clazz.getName());
         System.out.println(ToStringBuilder.reflectionToString(args));
         System.out.println(ToStringBuilder.reflectionToString(parameterNames));
@@ -41,15 +47,15 @@ public class MonitorAspect {
         return obj;
     }
 
-    @Around("point() && @annotation(monitor)")
-    private Object monitorV2(ProceedingJoinPoint jointPoint, Monitor monitor) throws Throwable {
-        Class<?> clazz = jointPoint.getTarget().getClass();
-        MethodSignature signature = (MethodSignature) jointPoint.getSignature();
+    @Around("point()")
+    private Object monitorV2(ProceedingJoinPoint jointPoint) throws Throwable {
 
-        Object[] args = jointPoint.getArgs();
+        MethodSignature signature = (MethodSignature)jointPoint.getSignature();
         String[] parameterNames = signature.getParameterNames();
         Class[] parameterTypes = signature.getParameterTypes();
 
+        Class<?> clazz = jointPoint.getTarget().getClass();
+        Object[] args = jointPoint.getArgs();
         System.out.println(clazz.getSimpleName() + "][" + clazz.getName());
         System.out.println(ToStringBuilder.reflectionToString(args));
         System.out.println(ToStringBuilder.reflectionToString(parameterNames));
@@ -62,7 +68,7 @@ public class MonitorAspect {
         return obj;
     }
 
-    @Pointcut("@annotation(com.jw.aspect.Monitor)")
+    @Pointcut("@annotation(com.jw.aspect.Monitor) && args(com.jw.dto.Foo)")
     private void point() {
     }
 

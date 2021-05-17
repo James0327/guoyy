@@ -1,5 +1,9 @@
 package com.jw.dto;
 
+import lombok.Data;
+
+import java.util.Map;
+
 /**
  * guoyy com.jw
  *
@@ -10,6 +14,16 @@ package com.jw.dto;
  * <p>
  * Copyright (C) 2019 JW All rights reserved.
  */
+@Data
 public class Foo {
 
+    private String traceId;
+
+    private Long id;
+
+    private String desc;
+
+    private String remark;
+
+    private Map<String, Object> context;
 }
