@@ -6,6 +6,7 @@ import java.util.stream.IntStream;
 /**
  * Description: guoyy
  * com.jw.algorithm.LenOfLIS
+ * 最长递增子序列（非连续字符）
  * <p>
  * Author: @author guoyiyong/james
  * Date: @date 2021/4/5 15:14
@@ -30,6 +31,7 @@ public class LenOfLIS {
     private int algorithm(int[] nums) {
         int len = nums.length;
 
+        // 设F(i)表示L中以Ai为末元素的最长递增子序列的长度
         int[] dp = new int[len];
         Arrays.fill(dp, 1);
 

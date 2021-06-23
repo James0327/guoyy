@@ -1,7 +1,16 @@
 package com.jw.algorithm.bitmap;
 
+import com.jw.disruptor.dsfjob.wrapper.EventWrapper;
+import io.protostuff.LinkedBuffer;
+import io.protostuff.ProtostuffIOUtil;
+import io.protostuff.runtime.RuntimeSchema;
+import org.apache.commons.lang3.StringUtils;
 import org.roaringbitmap.FastRankRoaringBitmap;
 import org.roaringbitmap.RoaringBitmap;
+
+import java.util.BitSet;
+import java.util.LinkedHashSet;
+import java.util.TreeSet;
 
 /**
  * guoyy com.jw.algorithm.bitmap
@@ -51,5 +60,36 @@ public class RoaringBitMapTest {
         boolean contains = bitmap2.contains(0, 0xffffffff + 1);
 
         System.out.println(contains);
+
+        BitSet bs = new BitSet();
+        System.out.println(bs);
+
+        StringUtils.split("", ",");
+
+        EventWrapper<TreeSet<Long>> event = new EventWrapper<>();
+        TreeSet<Long> obj = new TreeSet<>();
+        obj.add(1L);
+        event.setValue(obj);
+
+        LinkedBuffer buffer = LinkedBuffer.allocate(512);
+
+        RuntimeSchema schema = RuntimeSchema.createFrom(event.getClass());
+        byte[] data = ProtostuffIOUtil.toByteArray(event, schema, buffer);
+        buffer.clear();
+
+        System.out.println(data);
+
+        RoaringBitmap rr3 = new RoaringBitmap();
+
+        rr3.add(Integer.MIN_VALUE, -Integer.MIN_VALUE, 0, Integer.MAX_VALUE, -Integer.MAX_VALUE);
+        String s = rr3.toString();
+        System.out.println("s: " + s);
+        System.out.println(Integer.MIN_VALUE + "][" + rr3.contains(Integer.MIN_VALUE));
+        System.out.println((-Integer.MIN_VALUE) + "][" + rr3.contains(-Integer.MIN_VALUE));
+        System.out.println(Integer.MAX_VALUE + "][" + rr3.contains(Integer.MAX_VALUE));
+        System.out.println((-Integer.MAX_VALUE) + "][" + rr3.contains(-Integer.MAX_VALUE));
+
+        LinkedHashSet<Long> linkedHashSet = new LinkedHashSet<>();
+        System.out.println(linkedHashSet);
     }
 }

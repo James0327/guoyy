@@ -43,10 +43,42 @@ public class Test99 {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final Pattern COMPILE = Pattern.compile("\\w{2}|(?<!\\[)\\w{3}(?!\\])");
 
+    private final int zero = '0', nine = '9';
+
     @Data
     class Foo {
         private int id;
         private String seqNo;
+    }
+
+    @Test
+    public void test2() {
+        assert isNum("0");
+        assert isNum("1");
+        assert isNum("9");
+        assert isNum("123");
+        assert isNum("999999999999");
+        assert !isNum("12d3");
+        assert !isNum("a123");
+        assert !isNum("a0");
+        assert !isNum("123ddfd");
+    }
+
+    private boolean isNum(String src) {
+        if (src == null) {
+            return false;
+        }
+        int len = src.length();
+        if (len == 0) {
+            return false;
+        }
+        for (int i = 0; i < len; i++) {
+            char c = src.charAt(i);
+            if (c < zero || c > nine) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Test
