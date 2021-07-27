@@ -3,6 +3,7 @@ package com.jw;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,38 @@ import java.util.Map;
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
+@Slf4j
 public class MyTest {
+
+    @Test
+    public void test3() {
+        BitSet bs = new BitSet();
+        bs.set(0, false);
+        bs.set(1, true);
+        bs.set(128, true);
+
+        System.out.println("bs: " + bs);
+    }
+
+    @Test
+    public void test2() {
+        Map<String, Map<String, String>> cache = Maps.newConcurrentMap();
+        Map<String, Map<String, String>> cache2 = Maps.newHashMap();
+        String val = cache.computeIfAbsent("key1",
+                k -> Maps.newConcurrentMap())
+                .put("field1", "xxx");
+        System.out.println("val: " + val);
+
+        String val2 = cache2.computeIfAbsent("key2",
+                k -> Maps.newHashMap())
+                .put("field2", "xxxxxx");
+        System.out.println("val: " + val2);
+
+        System.out.println(cache);
+        System.out.println(cache2);
+        log.info("cache:{}", cache);
+        log.info("cache2:{}", cache2);
+    }
 
     @Test
     public void test() {
