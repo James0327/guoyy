@@ -16,11 +16,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>demo</module>
         <module>hbase-spring-boot-starter</module>
         <module>demo-api</module>
         <module>demo-provider</module>
         <module>demo-consumer</module>
+        <module>james</module>
+        <module>test</module>
     </modules>
 
     <properties>

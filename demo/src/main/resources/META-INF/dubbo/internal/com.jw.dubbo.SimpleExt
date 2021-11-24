@@ -1,3 +1,0 @@
-impl2=com.jw.dubbo.impl.SimpleExtImpl2 # Comment 2
-impl1=com.jw.dubbo.impl.SimpleExtImpl1 # Hello World
-impl3=com.jw.dubbo.impl.SimpleExtImpl3 # with head space
