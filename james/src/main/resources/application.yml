@@ -1,0 +1,79 @@
+server:
+  port: 8090
+  ssl:
+    enabled: true
+    protocol: TLS
+    key-alias: job-server
+    key-store: classpath:basedata.job.server.p12
+    key-store-password: basedata
+    key-store-type: JKS
+    client-auth: need
+    trust-store: classpath:basedata.job.server.p12
+    trust-store-password: basedata
+    trust-store-type: JKS
+    trust-store-provider: SUN
+
+debug: false
+
+logging:
+  # 默认文件
+  config: classpath:log4j2-spring.xml
+  level:
+    root: info
+    org.reddison: info
+
+hbase:
+  enable: true
+  table-name: james
+  column-family: f
+  token: jw
+  zookeeper: locahost
+  port: 2181
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    #    host: localhost
+    #    port: 6379
+    #    timeout: 3000
+    #    client-name: atpco_tax_complex
+    cluster:
+      nodes:
+        - redis://10.100.45.9:10048
+        - redis://10.100.45.26:10304
+        - redis://10.100.45.15:10299
+        - redis://10.100.45.42:11251
+        - redis://10.100.45.10:10881
+        - redis://10.100.45.14:10012
+      max-redirects: 1
+  security:
+    user:
+      name: actuator
+      password: actuator
+      roles: ACTUATOR_ADMIN
+  profiles:
+    include: basedata
+  aop:
+    proxy-target-class: true
+
+management:
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+fdfs:
+  # socket连接超时时间
+  so-timeout: 1500
+  # 连接tracker超时时间
+  connect-timeout: 600
+  pool:
+    max-total: 30
+    max-wait-millis: 120
+  tracker-list:
+    - 192.168.3.2:22122

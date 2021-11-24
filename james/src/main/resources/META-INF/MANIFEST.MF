@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Agent-Class: com.jw.james.bytecode.javassist.MyAgent
+Created-By: James
+Bundle-Version: 1.0
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
