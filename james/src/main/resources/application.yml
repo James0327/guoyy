@@ -76,4 +76,4 @@ fdfs:
     max-total: 30
     max-wait-millis: 120
   tracker-list:
-    - 192.168.3.2:22122
+    - 127.0.0.1:22122

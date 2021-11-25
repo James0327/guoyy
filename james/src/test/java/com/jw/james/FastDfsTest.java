@@ -29,8 +29,12 @@ public class FastDfsTest {
         File file = new File(path);
 
         String ret = fastDfsClient.uploadFile(file);
-
         System.out.println("ret: " + ret);
+
+        File f = new File("test.jpeg");
+        boolean b = fastDfsClient.downloadFile("group1/M00/00/00/CqF6W2GfOVKAdeZ3AAxIg1kuxDQ36.jpeg", f);
+        System.out.println("isSucess: " + b);
+
     }
 
 }

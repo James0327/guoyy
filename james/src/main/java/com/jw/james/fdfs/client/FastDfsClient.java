@@ -1,18 +1,22 @@
 package com.jw.james.fdfs.client;
 
+import com.alibaba.fastjson.JSON;
 import com.github.tobato.fastdfs.domain.conn.FdfsWebServer;
+import com.github.tobato.fastdfs.domain.fdfs.MetaData;
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.domain.proto.storage.DownloadByteArray;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Nullable;
 import javax.annotation.Resource;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.Set;
 
 /**
  * Description: guoyy
@@ -30,6 +34,12 @@ public class FastDfsClient {
     private FastFileStorageClient fastFileStorageClient;
     @Resource
     private FdfsWebServer fdfsWebServer;
+
+    @Nullable
+    public String getMetadata(String groupName, String path) {
+        Set<MetaData> metadata = fastFileStorageClient.getMetadata(groupName, path);
+        return JSON.toJSONString(metadata);
+    }
 
     public String uploadFile(File file) {
         try {
