@@ -1,20 +1,32 @@
+package com.jw;
+
+import com.jw.DataLoadHandler;
+import com.jw.TestApplication;
+import com.jw.anno.TableFileType;
+import com.jw.domain.Foo;
+import com.jw.enums.FileTypeEnum;
 import org.apache.commons.collections4.CollectionUtils;
 import org.joda.time.Duration;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Seconds;
 import org.joda.time.format.DateTimeFormat;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
  * Description: guoyy
- * PACKAGE_NAME.Test
+ * PACKAGE_NAME.com.jw.MyTest
  * <p>
  * Author: @author guoyiyong/james
  * Date: @date 2021/10/19 15:19
@@ -22,14 +34,39 @@ import java.util.Objects;
  * <p>
  * Copyright (C) 2021 JW All rights reserved.
  */
-public class Test {
+@SpringBootTest(classes = TestApplication.class)
+public class MyTest {
+    @Resource
+    private DataLoadHandler dataLoadHandler;
+
+    @Test
+    public void test() {
+        System.out.println("running is here ... ");
+        Class<? extends DataLoadHandler> clazz = dataLoadHandler.getClass();
+
+        TableFileType tableFileType = clazz.getAnnotation(TableFileType.class);
+        if (tableFileType == null) {
+            return;
+        }
+        FileTypeEnum[] fileTypeEnums = tableFileType.value();
+
+        Map<String, List<DataLoadHandler>> cache = new HashMap<>();
+
+        for (FileTypeEnum fileTypeEnum : fileTypeEnums) {
+            cache.computeIfAbsent(fileTypeEnum.getKey(), k -> new ArrayList<>()).add(dataLoadHandler);
+        }
+
+        System.out.println(cache);
+    }
 
     public static void main(String[] args) {
+        System.out.println("int max: " + Integer.MAX_VALUE);
+
         Foo[] foos = new Foo[30];
 
         List<Foo> fooList = Arrays.asList(foos);
 
-        System.out.println( CollectionUtils.isEmpty(fooList)  + "][" +fooList);
+        System.out.println(CollectionUtils.isEmpty(fooList) + "][" + fooList);
         System.out.println(fooList.stream().filter(Objects::nonNull).count() + "][" + fooList);
 
         foos[3] = new Foo();

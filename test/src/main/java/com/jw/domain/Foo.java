@@ -1,6 +1,8 @@
+package com.jw.domain;
+
 /**
  * Description: guoyy
- * PACKAGE_NAME.Foo
+ * PACKAGE_NAME.com.jw.domain.Foo
  * <p>
  * Author: @author guoyiyong/james
  * Date: @date 2021/10/19 15:20
