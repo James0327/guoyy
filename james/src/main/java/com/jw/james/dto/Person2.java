@@ -67,7 +67,7 @@ public class Person2 implements Serializable, Cloneable {
 
             System.out.println(o);
 
-            return (Person2) o;
+            return (Person2)o;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

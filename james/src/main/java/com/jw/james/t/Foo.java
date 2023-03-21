@@ -19,12 +19,15 @@ import java.util.concurrent.locks.ReentrantLock;
  * Copyright (C) 2020 JW All rights reserved.
  */
 public class Foo {
-    private static ReentrantLock lock = new ReentrantLock();
+    private static final ReentrantLock lock = new ReentrantLock();
     Condition f1 = lock.newCondition();
     Condition f2 = lock.newCondition();
     Condition f3 = lock.newCondition();
 
     private volatile int idx = 1;
+
+    public Foo() {
+    }
 
     public static void main(String[] args) {
         LocalDate now = LocalDate.now();
@@ -66,9 +69,6 @@ public class Foo {
                 foo.three();
             }
         }).start();
-    }
-
-    public Foo() {
     }
 
     public void one() {

@@ -37,7 +37,7 @@ public class JdkDynamicProxyTest {
 
         personProxy.goWorking(personProxy.getName(), "XXXXXX");
 
-        Class<?> proxyClass = Proxy.getProxyClass(Person.class.getClassLoader(), new Class[]{Person.class});
+        Class<?> proxyClass = Proxy.getProxyClass(Person.class.getClassLoader(), Person.class);
 
         byte[] data = ProxyGenerator.generateProxyClass("$PersonProxy0", proxyClass.getInterfaces());
         System.out.println(Base64.getEncoder().encodeToString(data));

@@ -63,7 +63,7 @@ public class JmhStringIntegerTest {
 
     @Param({"1000000", "10000000"})
     private int len;
-    private List<Foo> vals = Lists.newArrayList();
+    private final List<Foo> vals = Lists.newArrayList();
 
     @Benchmark
     public void iVal(Blackhole b) {

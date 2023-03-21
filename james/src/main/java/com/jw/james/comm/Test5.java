@@ -18,10 +18,10 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class Test5 {
 
-    private static ReentrantLock lock = new ReentrantLock();
-    private static Condition task = lock.newCondition();
+    private static final ReentrantLock lock = new ReentrantLock();
+    private static final Condition task = lock.newCondition();
 
-    private static AtomicBoolean isMq = new AtomicBoolean();
+    private static final AtomicBoolean isMq = new AtomicBoolean();
 
     public static void main(String[] args) {
         Runnable taskR = () -> {

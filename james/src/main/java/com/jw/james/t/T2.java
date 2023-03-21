@@ -10,68 +10,68 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @Description: test T2
+ * @Description: test T_v2
  * @Package: com.jw
- * @ClassName: T2
+ * @ClassName: T_v2
  * @Author: james.guo
  * @Date: 2019/3/14 17:58
  * @Version: 1.0
  */
 public class T2 {
-	private static class Couter {
-		private LongAdder longAdder = new LongAdder();
+    private static final Pattern compile = Pattern.compile("[a-zA-Z]{3}(?!_)");
 
-		public void incre() {
-			longAdder.increment();
-		}
+    public static void main(String[] args) {
+        String str = "bag_xmn-mf,mf-can/can-nh,nh-nrt|hnd-nh,nh-can/can-mf,mf-xmn";
+        Matcher matcher = compile.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+        str = "b_can-cz,cz-cdg/cdg-af,af-tlv|tlv-su,su-svo/svo-cz,cz-can";
+        matcher = compile.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
 
-		public void decre() {
-			longAdder.decrement();
-		}
+        int idx = str.indexOf("_");
+        matcher.find(idx);
+        String src = str.substring(idx + 1);
+        String[] strings = StringUtils.split(src, "-");
 
-		public Long get() {
-			return longAdder.sum();
-		}
-	}
+        System.out.println(strings);
 
-	private static final Pattern compile = Pattern.compile("[a-zA-Z]{3}(?!_)");
+        Map<Integer, Couter> map = Maps.newHashMap();
 
-	public static void main(String[] args) {
-		String str = "bag_xmn-mf,mf-can/can-nh,nh-nrt|hnd-nh,nh-can/can-mf,mf-xmn";
-		Matcher matcher = compile.matcher(str);
-		while (matcher.find()) {
-			System.out.println(matcher.group());
-		}
-		str = "b_can-cz,cz-cdg/cdg-af,af-tlv|tlv-su,su-svo/svo-cz,cz-can";
-		matcher = compile.matcher(str);
-		while (matcher.find()) {
-			System.out.println(matcher.group());
-		}
+        int size = 3;
 
-		int idx = str.indexOf("_");
-		matcher.find(idx);
-		String src = str.substring(idx + 1);
-		String[] strings = StringUtils.split(src, "-");
+        for (int i = 0; i < size; i++) {
+            map.put(i, new Couter());
+        }
 
-		System.out.println(strings);
+        Random r = new Random();
+        for (int i = 0; i < 1000; i++) {
+            map.get(r.nextInt(size)).incre();
+            map.get(r.nextInt(size)).decre();
+        }
 
-		Map<Integer, Couter> map = Maps.newHashMap();
+        for (int i = 0; i < size; i++) {
+            System.out.println("i:" + map.get(i).get());
+        }
 
-		int size = 3;
+    }
 
-		for (int i = 0; i < size; i++) {
-			map.put(i, new Couter());
-		}
+    private static class Couter {
+        private final LongAdder longAdder = new LongAdder();
 
-		Random r = new Random();
-		for (int i = 0; i < 1000; i++) {
-			map.get(r.nextInt(size)).incre();
-			map.get(r.nextInt(size)).decre();
-		}
+        public void incre() {
+            longAdder.increment();
+        }
 
-		for (int i = 0; i < size; i++) {
-			System.out.println("i:" + map.get(i).get());
-		}
+        public void decre() {
+            longAdder.decrement();
+        }
 
-	}
+        public Long get() {
+            return longAdder.sum();
+        }
+    }
 }

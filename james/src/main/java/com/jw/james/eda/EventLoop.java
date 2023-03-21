@@ -13,19 +13,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class EventLoop {
-    private LinkedBlockingQueue<Event> events = new LinkedBlockingQueue<>();
-
-    public void add(Event event) {
-        events.add(event);
-    }
-
-    public void handlerA(Event event) {
-        System.out.println(event.getData().toLowerCase());
-    }
-
-    public void handlerB(Event event) {
-        System.out.println(event.getData().toUpperCase());
-    }
+    private final LinkedBlockingQueue<Event> events = new LinkedBlockingQueue<>();
 
     {
         new Thread(() -> {
@@ -48,6 +36,18 @@ public class EventLoop {
                 e.printStackTrace();
             }
         }, "event-loop").start();
+    }
+
+    public void add(Event event) {
+        events.add(event);
+    }
+
+    public void handlerA(Event event) {
+        System.out.println(event.getData().toLowerCase());
+    }
+
+    public void handlerB(Event event) {
+        System.out.println(event.getData().toUpperCase());
     }
 
 }

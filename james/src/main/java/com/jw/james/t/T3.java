@@ -13,37 +13,37 @@ import java.util.List;
  */
 public class T3 {
 
-	public static void main(String[] args) {
-		new T3().t();
+    private final String name = "xxx";
+    private int age = 18;
 
-		List<Integer> list = new ArrayList<>(3);
-		for (int i = 0; i < 10; i++) {
-			list.add(i);
-		}
+    public static void main(String[] args) {
+        new T3().t();
 
-	}
+        List<Integer> list = new ArrayList<>(3);
+        for (int i = 0; i < 10; i++) {
+            list.add(i);
+        }
 
-	private int age = 18;
-	private String name = "xxx";
+    }
 
-	public void setVar(int age) {
-		age = 99;
-	}
+    public void t() {
+        int age = 28;
+        T3 t3 = new T3();
+        System.out.println("age=" + age);
 
-	public void setVar(T3 people) {
-		people.age = 100;
-	}
+        this.setVar(age);
+        this.setVar(t3);
 
-	public void t() {
-		int age = 28;
-		T3 t3 = new T3();
-		System.out.println("age=" + age);
+        System.out.println("age=" + age);
+        System.out.println("t3.age=" + t3.age);
+    }
 
-		this.setVar(age);
-		this.setVar(t3);
+    public void setVar(int age) {
+        age = 99;
+    }
 
-		System.out.println("age=" + age);
-		System.out.println("t3.age=" + t3.age);
-	}
+    public void setVar(T3 people) {
+        people.age = 100;
+    }
 
 }

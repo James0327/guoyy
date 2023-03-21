@@ -1,7 +1,9 @@
 package com.jw.james.disruptor;
 
+import com.alibaba.fastjson.JSON;
 import com.jw.james.disruptor.dsfjob.JobReqDTO;
 import com.jw.james.disruptor.dsfjob.TcScheduleDsfJobHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
+@Slf4j
 public class TcScheduleDsfJobHelperTest {
 
     @Test
@@ -25,6 +28,7 @@ public class TcScheduleDsfJobHelperTest {
             jobReqDTO.setTraceId("trace-" + i);
             jobReqDTO.setJobName("job-" + i);
             helper.consume(jobReqDTO);
+            log.info("consume: {}", JSON.toJSONString(jobReqDTO));
             Thread.sleep(1000);
         }
 

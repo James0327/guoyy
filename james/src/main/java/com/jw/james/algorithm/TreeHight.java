@@ -51,7 +51,7 @@ public class TreeHight {
     }
 
     private class Node {
-        private String val;
+        private final String val;
         private Node left, right;
 
         public Node(String val) {

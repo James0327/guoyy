@@ -11,12 +11,12 @@ package com.jw.james.comm;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class Test3 {
-    public synchronized  void doSomething(){
+    public synchronized void doSomething() {
         System.out.println("doSomething");
         doOther();
     }
 
-    public synchronized void doOther(){
+    public synchronized void doOther() {
         System.out.println("doOther");
     }
 

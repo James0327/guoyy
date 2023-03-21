@@ -26,6 +26,16 @@ import java.util.concurrent.TimeUnit;
  */
 public class OkHttpUtils {
 
+    private final OkHttpClient CLIENT;
+
+    public OkHttpUtils() {
+        CLIENT = new OkHttpClient.Builder()
+                .connectTimeout(3, TimeUnit.SECONDS)
+                .writeTimeout(3, TimeUnit.SECONDS)
+                .readTimeout(6, TimeUnit.SECONDS)
+                .build();
+    }
+
     public static void main(String[] args) throws IOException {
         OkHttpUtils okHttpUtils = new OkHttpUtils();
 
@@ -61,26 +71,6 @@ public class OkHttpUtils {
 
     }
 
-    private final OkHttpClient CLIENT;
-
-    public OkHttpUtils() {
-        CLIENT = new OkHttpClient.Builder()
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(3, TimeUnit.SECONDS)
-                .readTimeout(6, TimeUnit.SECONDS)
-                .build();
-    }
-
-    public void post(String url, byte[] obj, Callback callback) {
-        MediaType mediaType = MediaType.parse("application/json;charset=utf-8");
-        Request request = new Request.Builder().url(url)
-                .headers(Headers.of("Content-Type", "application/json;charset=utf-8"))
-                .post(RequestBody.create(mediaType, obj))
-                .build();
-
-        CLIENT.newCall(request).enqueue(callback);
-    }
-
     public String post(String url, byte[] obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json;charset=utf-8");
         Request request = new Request.Builder()
@@ -95,6 +85,16 @@ public class OkHttpUtils {
         }
 
         return resp.body().string();
+    }
+
+    public void post(String url, byte[] obj, Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json;charset=utf-8");
+        Request request = new Request.Builder().url(url)
+                .headers(Headers.of("Content-Type", "application/json;charset=utf-8"))
+                .post(RequestBody.create(mediaType, obj))
+                .build();
+
+        CLIENT.newCall(request).enqueue(callback);
     }
 
 }

@@ -26,42 +26,42 @@ import java.util.Map;
  */
 public class Serialized {
 
-	public static void main(String[] args) {
-		SubClass subClass = new SubClass();
-		subClass.setStr("aaa");
-		subClass.setIdx(1);
+    public static void main(String[] args) {
+        SubClass subClass = new SubClass();
+        subClass.setStr("aaa");
+        subClass.setIdx(1);
 
-		LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
-		IdStrategy idStrategy = RuntimeEnv.ID_STRATEGY;
+        LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+        IdStrategy idStrategy = RuntimeEnv.ID_STRATEGY;
 
-		RuntimeSchema<SuperClass> schema = RuntimeSchema.createFrom(SuperClass.class, idStrategy);
-		byte[] data = ProtostuffIOUtil.toByteArray(subClass, schema, buffer);
-		SuperClass superClass = new SuperClass();
-		ProtostuffIOUtil.mergeFrom(data, superClass, schema);
-		System.out.println(superClass);
+        RuntimeSchema<SuperClass> schema = RuntimeSchema.createFrom(SuperClass.class, idStrategy);
+        byte[] data = ProtostuffIOUtil.toByteArray(subClass, schema, buffer);
+        SuperClass superClass = new SuperClass();
+        ProtostuffIOUtil.mergeFrom(data, superClass, schema);
+        System.out.println(superClass);
 
-		Clazz clazz = new Clazz();
-		Map<Integer, Map<String, SuperClass>> map = Maps.newHashMap();
-		clazz.setMap(map);
-		Map<String, SuperClass> subMap = Maps.newHashMap();
-		subMap.put("SubClass", subClass);
-		map.put(1, subMap);
+        Clazz clazz = new Clazz();
+        Map<Integer, Map<String, SuperClass>> map = Maps.newHashMap();
+        clazz.setMap(map);
+        Map<String, SuperClass> subMap = Maps.newHashMap();
+        subMap.put("SubClass", subClass);
+        map.put(1, subMap);
 
-		LinkedBuffer buffer1 = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
-		DefaultIdStrategy strategy = new DefaultIdStrategy(0, null, 0);
-		RuntimeSchema<Clazz> schema1 = RuntimeSchema.createFrom(Clazz.class, strategy);
-		byte[] data0 = ProtostuffIOUtil.toByteArray(clazz, schema1, buffer1);
+        LinkedBuffer buffer1 = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+        DefaultIdStrategy strategy = new DefaultIdStrategy(0, null, 0);
+        RuntimeSchema<Clazz> schema1 = RuntimeSchema.createFrom(Clazz.class, strategy);
+        byte[] data0 = ProtostuffIOUtil.toByteArray(clazz, schema1, buffer1);
 
-		RuntimeSchema<Clazz> schema2 = RuntimeSchema.createFrom(Clazz.class);
-		Clazz clazz1 = new Clazz();
-		ProtostuffIOUtil.mergeFrom(data0, clazz1, schema2);
-		System.out.println(clazz1);
+        RuntimeSchema<Clazz> schema2 = RuntimeSchema.createFrom(Clazz.class);
+        Clazz clazz1 = new Clazz();
+        ProtostuffIOUtil.mergeFrom(data0, clazz1, schema2);
+        System.out.println(clazz1);
 
-		System.out.println(JSON.toJSONString(clazz));
+        System.out.println(JSON.toJSONString(clazz));
 
-		String json = "{\"map\":{1:{\"SubClass\":{\"idx\":1,\"str\":\"aaa\"}}}}";
-		Clazz clazz2 = JSON.parseObject(json, Clazz.class);
-		System.out.println(clazz2);
-	}
+        String json = "{\"map\":{1:{\"SubClass\":{\"idx\":1,\"str\":\"aaa\"}}}}";
+        Clazz clazz2 = JSON.parseObject(json, Clazz.class);
+        System.out.println(clazz2);
+    }
 
 }

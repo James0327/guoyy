@@ -127,15 +127,12 @@ public class SortedList<T> extends AbstractList<T> implements Serializable {
      * each node containing the same values.
      */
     boolean structurallyEqualTo(SortedList<T> other) {
-        return (other == null) ? false : structurallyEqualTo(root, other.root);
+        return other != null && structurallyEqualTo(root, other.root);
     }
 
     private boolean structurallyEqualTo(Node currentThis, Node currentOther) {
         if (currentThis == null) {
-            if (currentOther == null) {
-                return true;
-            }
-            return false;
+            return currentOther == null;
         } else if (currentOther == null) {
             return false;
         }

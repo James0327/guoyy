@@ -14,7 +14,7 @@ import com.jw.james.hbase.conf.HBaseConf;
  * Copyright (C) 2020 JW All rights reserved.
  */
 public class HBaseService {
-    private HBaseConf hBaseConf;
+    private final HBaseConf hBaseConf;
 
     public HBaseService(HBaseConf hBaseConf) {
         this.hBaseConf = hBaseConf;

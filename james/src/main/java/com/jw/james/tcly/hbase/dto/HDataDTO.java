@@ -17,20 +17,20 @@ import java.util.List;
 @Setter
 @Getter
 public class HDataDTO {
+    private String rowKey;
+    private List<ColumnFamilie> columnFamilies;
+
     @Setter
     @Getter
     public static class ColumnFamilie {
+        private String familyName;
+        private List<Column> columns;
+
         @Setter
         @Getter
         public static class Column {
             private String qualifier;
             private byte[] value;
         }
-
-        private String familyName;
-        private List<Column> columns;
     }
-
-    private String rowKey;
-    private List<ColumnFamilie> columnFamilies;
 }

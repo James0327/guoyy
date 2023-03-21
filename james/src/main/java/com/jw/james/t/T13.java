@@ -15,24 +15,8 @@ import java.util.concurrent.Semaphore;
  */
 public class T13 {
     private static final int MAX_THREADS = 10;
-    private static CountDownLatch latch = new CountDownLatch(MAX_THREADS);
-    private static CountDownLatch cdl = new CountDownLatch(MAX_THREADS);
-
-    private static class Listener extends Semaphore implements Cloneable {
-        public Listener(int permits) {
-            super(permits);
-        }
-
-        @Override
-        public Listener clone() {
-            try {
-                return (Listener)super.clone();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new Listener(0);
-            }
-        }
-    }
+    private static final CountDownLatch latch = new CountDownLatch(MAX_THREADS);
+    private static final CountDownLatch cdl = new CountDownLatch(MAX_THREADS);
 
     public static void main(String[] args) throws InterruptedException {
         Listener listener = new Listener(0);
@@ -57,5 +41,21 @@ public class T13 {
         }
 
         cdl.await();
+    }
+
+    private static class Listener extends Semaphore implements Cloneable {
+        public Listener(int permits) {
+            super(permits);
+        }
+
+        @Override
+        public Listener clone() {
+            try {
+                return (Listener)super.clone();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Listener(0);
+            }
+        }
     }
 }

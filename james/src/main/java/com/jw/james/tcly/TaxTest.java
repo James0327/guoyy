@@ -87,8 +87,8 @@ public class TaxTest {
         byte b1 = 1;
         byte b2 = 2;
 
-        int i1 = (int)b1;
-        int i2 = (int)b2;
+        int i1 = b1;
+        int i2 = b2;
 
         System.out.println(i1);
         System.out.println(i2);

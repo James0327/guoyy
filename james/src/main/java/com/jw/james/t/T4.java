@@ -29,16 +29,14 @@ public class T4 {
         List<BaggageReturn> baggageReturnList0 = new ArrayList<>();
         baggageReturnUnion0.setBaggageReturnList(baggageReturnList0);
 
-
-
         List<BaggageReturn> baggageReturnList1 = new ArrayList<>();
         baggageReturnUnion1.setBaggageReturnList(baggageReturnList1);
 
-        BaggageReturn baggageReturn0=new BaggageReturn();
+        BaggageReturn baggageReturn0 = new BaggageReturn();
         baggageReturn0.setFareRelated(false);
-        BaggageReturn baggageReturn1=new BaggageReturn();
+        BaggageReturn baggageReturn1 = new BaggageReturn();
         baggageReturn1.setFareRelated(true);
-        BaggageReturn baggageReturn2=new BaggageReturn();
+        BaggageReturn baggageReturn2 = new BaggageReturn();
         baggageReturn2.setFareRelated(true);
 
         baggageReturnList0.add(baggageReturn0);

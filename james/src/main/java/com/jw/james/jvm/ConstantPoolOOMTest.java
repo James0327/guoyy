@@ -48,20 +48,6 @@ public class ConstantPoolOOMTest {
         test1();
     }
 
-    private static void test0() {
-        List<String> data = Lists.newArrayList();
-
-        int i = 0;
-        try {
-            while (true) {
-                data.add(UUID.randomUUID().toString());
-                i++;
-            }
-        } finally {
-            System.out.println("run tiems: " + i);
-        }
-    }
-
     /**
      * java.lang.OutOfMemoryError: Metaspace
      * Dumping heap to logs/java_pid62529.hprof ...
@@ -92,6 +78,20 @@ public class ConstantPoolOOMTest {
             System.out.println("class cnt: " + i);
         }
 
+    }
+
+    private static void test0() {
+        List<String> data = Lists.newArrayList();
+
+        int i = 0;
+        try {
+            while (true) {
+                data.add(UUID.randomUUID().toString());
+                i++;
+            }
+        } finally {
+            System.out.println("run tiems: " + i);
+        }
     }
 
     public static class OOMObject {

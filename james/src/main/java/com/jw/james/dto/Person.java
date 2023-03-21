@@ -82,6 +82,11 @@ public class Person {
     }
 
     @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(id).append(name).append(age).append(sex).append(phone).append(addr).toHashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -94,10 +99,5 @@ public class Person {
         Person person = (Person)o;
 
         return new EqualsBuilder().append(id, person.id).append(age, person.age).append(sex, person.sex).append(name, person.name).append(phone, person.phone).append(addr, person.addr).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(id).append(name).append(age).append(sex).append(phone).append(addr).toHashCode();
     }
 }

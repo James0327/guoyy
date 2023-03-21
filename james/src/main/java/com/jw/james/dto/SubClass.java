@@ -16,5 +16,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SubClass extends SuperClass {
-	private int idx;
+    private int idx;
 }

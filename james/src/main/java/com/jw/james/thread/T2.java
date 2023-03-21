@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
  * 开启偏向锁：-XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0
  * 关闭偏向锁：-XX:-UseBiasedLocking
  *
- * @Description: test T2
+ * @Description: test T_v2
  * @Package: com.jw.thread
- * @ClassName: T2
+ * @ClassName: T_v2
  * @Author: james.guo
  * @Date: 2019/7/23 16:13
  * @Version: 1.0

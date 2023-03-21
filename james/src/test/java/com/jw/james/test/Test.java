@@ -21,7 +21,7 @@ public class Test {
 
     class A implements Runnable {
         private Integer cnt = 0;
-        private AtomicInteger idx = new AtomicInteger();
+        private final AtomicInteger idx = new AtomicInteger();
 
         @Override
         public void run() {

@@ -18,8 +18,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class MinHeap {
 
     static class MyMinHeap {
-        private PriorityQueue<Integer> queue;
-        private int size;
+        private final PriorityQueue<Integer> queue;
+        private final int size;
 
         public MyMinHeap(int size) {
             this.size = size;

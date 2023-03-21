@@ -14,6 +14,8 @@ public interface DataLoadHandler {
 
     /**
      * 加载数据
+     *
+     * @return boolean
      */
     boolean load();
 

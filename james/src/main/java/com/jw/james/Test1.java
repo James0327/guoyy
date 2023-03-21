@@ -186,7 +186,7 @@ public final class Test1 {
 
     private enum Singleton {
         INSTANCE;
-        private Test1 test1;
+        private final Test1 test1;
 
         Singleton() {
             this.test1 = new Test1();

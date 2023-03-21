@@ -45,139 +45,9 @@ import java.util.stream.Stream;
  */
 public class TT1 {
 
-    @Test
-    public void test4() {
-        final String json = "{}";
-        boolean validate = JSONValidator.from(json).validate();
-        boolean starts = StringUtils.startsWith(json, "[");
-        boolean ends = StringUtils.endsWith(json, "]");
-
-        System.out.println(String.format("validate:%s, starts:%s, ends:%s.", validate, starts, ends));
-
-        List<JSONObject> objs = JSONObject.parseObject(json, List.class);
-        System.out.println(objs);
-    }
-
-    @Test
-    public void test3() {
-        ArrayList<String> list = Lists.newArrayListWithCapacity(128);
-
-        List<String> subList = list.subList(0, 1);
-
-        subList = Lists.newArrayList(subList);
-        System.out.println(subList);
-
-        List<String> subList2 = list.stream().skip(1).limit(5).collect(Collectors.toList());
-        System.out.println(subList2);
-
-    }
-
-    @Test
-    public void test2() {
-
-        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(1),
-                new BasicThreadFactory.Builder().namingPattern("xxx-xxx-%d").build(),
-                new ThreadPoolExecutor.AbortPolicy());
-        pool.execute(() -> {
-            Thread thread = Thread.currentThread();
-            System.out.println(thread);
-        });
-
-        Thread thread = new Thread(() -> {
-            int cnt = 0;
-            while (true) {
-                System.out.println("park " + Thread.currentThread().getName());
-                LockSupport.park();
-                // do something
-                cnt++;
-                System.out.println(Thread.currentThread().getName() + " exec / " + cnt);
-
-                LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
-                LockSupport.unpark(Thread.currentThread());
-            }
-        });
-        thread.start();
-
-        for (int i = 0; i < 1; i++) {
-            LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
-            System.out.println("unpark thread: " + thread.getName());
-            LockSupport.unpark(thread);
-        }
-
-        LockSupport.park();
-    }
-
-    private ThreadLocal<Object> threadLocal = new ThreadLocal<>();
-
-    private enum PassengerTypeEnum {
-        ADT("ADT", "成人"),
-        CHD("CHD", "儿童"),
-        CNN("CNN", "儿童"),
-        STU("STU", "学生"),
-        INF("INF", "婴儿");
-
-        private String code;
-
-        private String description;
-
-        PassengerTypeEnum(String code, String description) {
-            this.code = code;
-            this.description = description;
-        }
-
-        public void setCode(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static PassengerTypeEnum getByCode(String code) {
-            for (PassengerTypeEnum passengerTypeEnum : PassengerTypeEnum.values()) {
-                if (passengerTypeEnum.getCode().equals(code)) {
-                    return passengerTypeEnum;
-                }
-            }
-            return null;
-        }
-
-    }
-
     private static final Pattern TIME_PATTERN = Pattern.compile("^T\\d{8}$");
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("'T'MMddHHmm");
-
-    @Test
-    public void test() {
-        threadLocal.set(new Object());
-        threadLocal.get();
-
-        threadLocal.remove();
-
-        Pattern COMPILE = Pattern.compile("(?<=[\\-,])[\\w]{2}(?=[\\-,])");
-
-        String str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
-
-        Matcher matcher = COMPILE.matcher(str);
-        while (matcher.find()) {
-            System.out.println(matcher.group());
-        }
-
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-
-        COMPILE = Pattern.compile("(?<=,)[\\w]{2}(?=\\-)");
-
-        str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
-
-        matcher = COMPILE.matcher(str);
-        while (matcher.find()) {
-            System.out.println(matcher.group());
-        }
-
-        int i = Integer.parseInt("1010", 2);
-        System.out.println(i);
-    }
+    private final ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 
     public static void main(String[] args) {
 
@@ -266,6 +136,134 @@ public class TT1 {
         Date date = calendar.getTime();
 
         System.out.println("date: " + date);
+
+    }
+
+    @Test
+    public void test4() {
+        final String json = "{}";
+        boolean validate = JSONValidator.from(json).validate();
+        boolean starts = StringUtils.startsWith(json, "[");
+        boolean ends = StringUtils.endsWith(json, "]");
+
+        System.out.println(String.format("validate:%s, starts:%s, ends:%s.", validate, starts, ends));
+
+        List<JSONObject> objs = JSONObject.parseObject(json, List.class);
+        System.out.println(objs);
+    }
+
+    @Test
+    public void test3() {
+        ArrayList<String> list = Lists.newArrayListWithCapacity(128);
+
+        List<String> subList = list.subList(0, 1);
+
+        subList = Lists.newArrayList(subList);
+        System.out.println(subList);
+
+        List<String> subList2 = list.stream().skip(1).limit(5).collect(Collectors.toList());
+        System.out.println(subList2);
+
+    }
+
+    @Test
+    public void test2() {
+
+        ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>(1),
+                new BasicThreadFactory.Builder().namingPattern("xxx-xxx-%d").build(),
+                new ThreadPoolExecutor.AbortPolicy());
+        pool.execute(() -> {
+            Thread thread = Thread.currentThread();
+            System.out.println(thread);
+        });
+
+        Thread thread = new Thread(() -> {
+            int cnt = 0;
+            while (true) {
+                System.out.println("park " + Thread.currentThread().getName());
+                LockSupport.park();
+                // do something
+                cnt++;
+                System.out.println(Thread.currentThread().getName() + " exec / " + cnt);
+
+                LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
+                LockSupport.unpark(Thread.currentThread());
+            }
+        });
+        thread.start();
+
+        for (int i = 0; i < 1; i++) {
+            LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
+            System.out.println("unpark thread: " + thread.getName());
+            LockSupport.unpark(thread);
+        }
+
+        LockSupport.park();
+    }
+
+    @Test
+    public void test() {
+        threadLocal.set(new Object());
+        threadLocal.get();
+
+        threadLocal.remove();
+
+        Pattern COMPILE = Pattern.compile("(?<=[\\-,])[\\w]{2}(?=[\\-,])");
+
+        String str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
+
+        Matcher matcher = COMPILE.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+
+        COMPILE = Pattern.compile("(?<=,)[\\w]{2}(?=\\-)");
+
+        str = "hgh-br,ca-tpe|tpe-hu,cz-xiy/xiy-hu,aa-hgh";
+
+        matcher = COMPILE.matcher(str);
+        while (matcher.find()) {
+            System.out.println(matcher.group());
+        }
+
+        int i = Integer.parseInt("1010", 2);
+        System.out.println(i);
+    }
+
+    private enum PassengerTypeEnum {
+        ADT("ADT", "成人"),
+        CHD("CHD", "儿童"),
+        CNN("CNN", "儿童"),
+        STU("STU", "学生"),
+        INF("INF", "婴儿");
+
+        private final String description;
+        private String code;
+
+        PassengerTypeEnum(String code, String description) {
+            this.code = code;
+            this.description = description;
+        }
+
+        public static PassengerTypeEnum getByCode(String code) {
+            for (PassengerTypeEnum passengerTypeEnum : PassengerTypeEnum.values()) {
+                if (passengerTypeEnum.getCode().equals(code)) {
+                    return passengerTypeEnum;
+                }
+            }
+            return null;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
 
     }
 

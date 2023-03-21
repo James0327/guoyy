@@ -16,5 +16,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SuperClass {
-	private String str;
+    private String str;
 }

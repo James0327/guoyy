@@ -18,5 +18,5 @@ import java.util.Map;
 @Setter
 @Getter
 public class Clazz {
-	private Map<Integer, Map<String, SuperClass>> map;
+    private Map<Integer, Map<String, SuperClass>> map;
 }

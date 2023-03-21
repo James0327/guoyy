@@ -31,57 +31,6 @@ public class T1 {
 
     private static final Pattern PATTERN2 = Pattern.compile("(\\d+)(?:[PpCc]{2}|[Pp]|[Kk])$");
 
-    @Test
-    public void test1() {
-        Random r = new Random();
-        Map<Long, String> map = Maps.newLinkedHashMap();
-        for (int i = 0; i < 10; i++) {
-            map.put(new Long(i), Long.toString(r.nextLong()));
-        }
-
-        Iterator<Map.Entry<Long, String>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Long, String> entry = iterator.next();
-            Long k = entry.getKey();
-            String v = entry.getValue();
-            if (k == 3 || k == 6) {
-                iterator.remove();
-            }
-            System.out.println(String.format("k:%s, v:%s.", k, v));
-        }
-
-        System.out.println(map);
-    }
-
-    @Test
-    public void test() {
-        Map<String, String> map = new TreeMap<>(Comparator.reverseOrder());
-        map.put("20", "CM");
-        map.put("240", "CM");
-        map.put("202", "CM");
-        map.put("201", "CM");
-
-        System.out.println(map);
-        map.forEach((k, v) -> System.out.println(String.format("k:%s, v:%s.", k, v)));
-
-        int a = 1;
-        int b = 2;
-        String c = "3";
-
-        System.out.println(a + b + c);
-
-        List list = new ArrayList();
-        list.add("20");
-        list.add("240");
-        list.add("202");
-        list.add("201");
-
-        Collections.sort(list, Comparator.reverseOrder());
-
-        String ret = StringUtils.join(list, "*");
-        System.out.println("ret: " + ret);
-    }
-
     public static void main(String[] args) {
 
         ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 2, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(1024),
@@ -180,5 +129,56 @@ public class T1 {
 
         byte[] decode = Base64.getDecoder().decode(str);
         System.out.println(new String(decode));
+    }
+
+    @Test
+    public void test1() {
+        Random r = new Random();
+        Map<Long, String> map = Maps.newLinkedHashMap();
+        for (int i = 0; i < 10; i++) {
+            map.put(new Long(i), Long.toString(r.nextLong()));
+        }
+
+        Iterator<Map.Entry<Long, String>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Long, String> entry = iterator.next();
+            Long k = entry.getKey();
+            String v = entry.getValue();
+            if (k == 3 || k == 6) {
+                iterator.remove();
+            }
+            System.out.println(String.format("k:%s, v:%s.", k, v));
+        }
+
+        System.out.println(map);
+    }
+
+    @Test
+    public void test() {
+        Map<String, String> map = new TreeMap<>(Comparator.reverseOrder());
+        map.put("20", "CM");
+        map.put("240", "CM");
+        map.put("202", "CM");
+        map.put("201", "CM");
+
+        System.out.println(map);
+        map.forEach((k, v) -> System.out.println(String.format("k:%s, v:%s.", k, v)));
+
+        int a = 1;
+        int b = 2;
+        String c = "3";
+
+        System.out.println(a + b + c);
+
+        List list = new ArrayList();
+        list.add("20");
+        list.add("240");
+        list.add("202");
+        list.add("201");
+
+        Collections.sort(list, Comparator.reverseOrder());
+
+        String ret = StringUtils.join(list, "*");
+        System.out.println("ret: " + ret);
     }
 }

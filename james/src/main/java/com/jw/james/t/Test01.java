@@ -24,13 +24,26 @@ import java.util.regex.Pattern;
  */
 public class Test01 {
     private final Pattern compile = Pattern.compile("(?<![\\w])[\\w]{2}(?!=[\\w])");
-
+    private final AtomicBoolean doT1 = new AtomicBoolean(true);
+    private final AtomicBoolean doT2 = new AtomicBoolean(false);
     private Thread t1 = null, t2 = null;
-
     private volatile int num = 1;
 
-    private AtomicBoolean doT1 = new AtomicBoolean(true);
-    private AtomicBoolean doT2 = new AtomicBoolean(false);
+    public static void main(String[] args) {
+        int t = -1;
+        System.out.println("t:" + Integer.toBinaryString(t));
+        int i = 1;
+        System.out.println("i:" + Integer.toBinaryString(i));
+        int i2 = 1 << 1;
+        System.out.println("i2:" + Integer.toBinaryString(i2));
+        int i4 = 1 << 2;
+        System.out.println("i4:" + Integer.toBinaryString(i4));
+
+        t = t ^ i2;
+
+        System.out.println("t[" + Integer.toBinaryString(t));
+
+    }
 
     @Test
     public void test5() {
@@ -179,22 +192,6 @@ public class Test01 {
         while (matcher.find()) {
             System.out.println(matcher.group());
         }
-    }
-
-    public static void main(String[] args) {
-        int t = -1;
-        System.out.println("t:" + Integer.toBinaryString(t));
-        int i = 1;
-        System.out.println("i:" + Integer.toBinaryString(i));
-        int i2 = 1 << 1;
-        System.out.println("i2:" + Integer.toBinaryString(i2));
-        int i4 = 1 << 2;
-        System.out.println("i4:" + Integer.toBinaryString(i4));
-
-        t = t ^ i2;
-
-        System.out.println("t[" + Integer.toBinaryString(t));
-
     }
 
 }

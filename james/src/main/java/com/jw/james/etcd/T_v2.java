@@ -12,14 +12,14 @@ import java.net.URI;
  * <p>
  * etcd 2.x 版本
  *
- * @Description: com.jw.etcd.T2
+ * @Description: com.jw.etcd.T_v2
  * @Author: guoyiyong/james
  * @Date: 2020-08-10 20:17
  * @Version: 1.0
  * <p>
  * Copyright (C) 2020 JW All rights reserved.
  */
-public class T2 {
+public class T_v2 {
 
     public static void main(String[] args) {
         EtcdClient etcdClient = new EtcdClient(URI.create("http://127.0.0.1:2379"));

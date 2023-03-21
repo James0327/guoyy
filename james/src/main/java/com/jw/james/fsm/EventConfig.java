@@ -17,7 +17,7 @@ import org.springframework.statemachine.annotation.WithStateMachine;
  */
 @WithStateMachine(id = "order")
 public class EventConfig {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @OnTransition(target = "UNPAID")
     public void create() {

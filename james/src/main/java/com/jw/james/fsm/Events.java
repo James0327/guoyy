@@ -12,5 +12,5 @@ package com.jw.james.fsm;
  */
 public enum Events {
     PAY,
-    RECEIVE;
+    RECEIVE
 }

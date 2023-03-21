@@ -1,0 +1,16 @@
+server:
+  port: 8090
+
+debug: true
+
+logging:
+  # 默认文件
+  config: classpath:log4j2-spring.xml
+  level:
+    root: info
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  aop:
+    proxy-target-class: true

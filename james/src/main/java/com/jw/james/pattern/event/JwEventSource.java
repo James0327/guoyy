@@ -19,7 +19,7 @@ import java.util.Vector;
  */
 public class JwEventSource {
 
-    private Vector<JwEventListener> listeners = new Vector<>();
+    private final Vector<JwEventListener> listeners = new Vector<>();
 
     public void addEventListener(JwEventListener listener) {
         listeners.add(listener);

@@ -28,7 +28,7 @@ public class BackTrack {
      * 浅拷贝
      */
     private final BeanCopier copier = BeanCopier.create(int[][].class, int[][].class, false);
-    private int n;
+    private final int n;
 
     private final MapperFacade mapperFacade;
 

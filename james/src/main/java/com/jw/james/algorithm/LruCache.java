@@ -16,11 +16,11 @@ import java.util.concurrent.atomic.LongAdder;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class LruCache {
-    private int maxSize;
+    private final int maxSize;
 
-    private Queue<Integer> queue;
+    private final Queue<Integer> queue;
 
-    private LongAdder sum = new LongAdder();
+    private final LongAdder sum = new LongAdder();
 
     public LruCache(int maxSize) {
         this.maxSize = maxSize;

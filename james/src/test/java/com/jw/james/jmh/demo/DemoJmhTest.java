@@ -61,7 +61,7 @@ public class DemoJmhTest {
     @Benchmark
     public void parallelStreamCal(Blackhole b) {
         b.consume(parallelStreamCal.sum(numbers));
-        b.consumeCPU(1);
+        Blackhole.consumeCPU(1);
     }
 
     @Benchmark

@@ -33,7 +33,6 @@ public class TcScheduleDsfJobHelper {
     private final RingBuffer<EventWrapper<JobReqDTO>> ringBuffer;
 
     public TcScheduleDsfJobHelper() {
-
         // 初始化队列
         Disruptor<EventWrapper<JobReqDTO>> disruptor = new Disruptor<>(EventWrapper::new, 1 << 7,
                 new BasicThreadFactory.Builder().namingPattern("TcScheduleDsfJob-exec-%d").daemon(true).build(),
@@ -52,7 +51,7 @@ public class TcScheduleDsfJobHelper {
 
         disruptor.start();
         // 销毁队列
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> disruptor.shutdown()));
+        Runtime.getRuntime().addShutdownHook(new Thread(disruptor::shutdown));
 
         ringBuffer = disruptor.getRingBuffer();
     }
@@ -62,7 +61,7 @@ public class TcScheduleDsfJobHelper {
         if (jobReqDTO != null && StringUtils.isNotBlank(jobReqDTO.getJobName()) && StringUtils.isNotBlank(jobReqDTO.getTraceId())) {
             try {
                 ringBuffer.publishEvent((event, sequence, data) -> event.setValue(data), jobReqDTO);
-                System.out.println("ringBuffer: " + ringBuffer);
+                log.info("ringBuffer: " + ringBuffer);
             } catch (Exception ex) {
                 jobRespDTO.setSuccess(false);
             }
@@ -88,12 +87,12 @@ public class TcScheduleDsfJobHelper {
             final String jobName = jobReqDTO.getJobName();
 
             final DateTime start = DateTime.now();
-            System.out.println(Thread.currentThread().getName() + "消费逻辑。。。" + jobName);
+            log.info(Thread.currentThread().getName() + "消费逻辑。。。" + jobName);
             LockSupport.parkNanos(TimeUnit.SECONDS.toNanos(3));
             final DateTime end = DateTime.now();
             // 更新状态为就绪
             log.info("更新状态为就绪,JobName:{},{}=>{}", jobName, "DOING", "READY");
-            log.info("estimated time(ms): ", end.getMillis() - start.getMillis());
+            log.info("estimated time(ms): {}", end.getMillis() - start.getMillis());
         }
     }
 

@@ -38,6 +38,28 @@ import java.util.concurrent.Semaphore;
 @Slf4j
 public class HttpJobUtil {
 
+    private final HostnameVerifier hostnameVerifier = (String hostname, SSLSession session) -> {
+        if (StringUtils.contains(hostname, "17usoft.com")
+                || StringUtils.equals(hostname, "localhost")) {
+            return true;
+        }
+        log.info("HostnameVerifier hostname:{}", hostname);
+        HostnameVerifier verifier = HttpsURLConnection.getDefaultHostnameVerifier();
+        return verifier.verify(hostname, session);
+    };
+    private final X509TrustManager trustManager = new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(X509Certificate[] x509Certificates, String authType) {}
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] x509Certificates, String authType) {}
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[0];
+        }
+    };
+
     public static void main(String[] args) throws Exception {
         HttpJobUtil httpJobUtil = new HttpJobUtil();
         httpJobUtil.test();
@@ -108,28 +130,5 @@ public class HttpJobUtil {
         }
         return null;
     }
-
-    private HostnameVerifier hostnameVerifier = (String hostname, SSLSession session) -> {
-        if (StringUtils.contains(hostname, "17usoft.com")
-                || StringUtils.equals(hostname, "localhost")) {
-            return true;
-        }
-        log.info("HostnameVerifier hostname:{}", hostname);
-        HostnameVerifier verifier = HttpsURLConnection.getDefaultHostnameVerifier();
-        return verifier.verify(hostname, session);
-    };
-
-    private X509TrustManager trustManager = new X509TrustManager() {
-        @Override
-        public void checkClientTrusted(X509Certificate[] x509Certificates, String authType) {}
-
-        @Override
-        public void checkServerTrusted(X509Certificate[] x509Certificates, String authType) {}
-
-        @Override
-        public X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[0];
-        }
-    };
 
 }

@@ -19,6 +19,11 @@ public class BitMapStore {
 
     @Test
     public void test() {
+        long l = (long)Integer.MAX_VALUE * 64;
+        System.out.println("l: " + l);
+
+        System.exit(1);
+
         final int size = 19;
 
         for (int i = 0; i <= size; i++) {
@@ -40,14 +45,13 @@ public class BitMapStore {
         System.out.println(Arrays.toString(getBooleanArray(bitArr[1])));
         System.out.println(Arrays.toString(getBooleanArray(bitArr[2])));
         System.out.println(Arrays.toString(getBooleanArray(bitArr[3])));
-
     }
 
     /**
      * 一个int 4个字节，一个字节8bit 每个bit可以表示一个数字是否存在
      * 也就是说一个byte能存8个数，如果16个数 正好需要2byte byte[0]存0~7；byte[1]存8~16个数
      */
-    private byte[] bitArr = new byte[8];
+    private final byte[] bitArr = new byte[8];
 
     public void clear(int i) {
         bitArr[idx(i)] &= ~(1 << position(i));

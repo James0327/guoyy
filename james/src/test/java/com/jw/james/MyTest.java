@@ -1,6 +1,7 @@
 package com.jw.james;
 
 import com.alibaba.fastjson.JSON;
+import com.github.luben.zstd.Zstd;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,11 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.time.ZoneId;
+import java.util.Base64;
 import java.util.BitSet;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -35,6 +39,88 @@ import java.util.Set;
  */
 @Slf4j
 public class MyTest {
+    class T {
+        private Map<String, String> map;
+
+        public Map<String, String> getMap() {
+            return map;
+        }
+
+        public void setMap(Map<String, String> map) {
+            this.map = map;
+        }
+    }
+
+    @org.junit.jupiter.api.Test
+    public void test6() throws Exception {
+        String password = "XFPOFVQJDLOSYLINVBZKGLWAWIDGDVG2O3THJQYAVE24WAOKKY3Q";
+        String projectId = "bjiflihgt.java.iflight.schedule.core";
+
+        String decrypt = com.ly.dal.util.StringEncrypt.decrypt(password, projectId);
+        // decrypt: XKKz56VCKlnJkjGvyfQNs
+        System.out.println("decrypt: " + decrypt);
+    }
+
+    @Test
+    public void test5() {
+        String json = "{\"baggageInfo\":{\"baggageRuleList\":[{\"freeBaggageAllowance\":\"2PC\",\"globalSymbol\":\"EH\",\"invalidTime\":\"2022-08-19\",\"parkPermitted\":true,\"passengerType\":\"ADT\",\"powerTime\":\"2022-08-19\",\"segmentNum\":1,\"suitableCabinCodeWhenTransfer\":\"J\"}]},\"createDate\":\"2022-06-22 17:52:11\",\"engineType\":\"1T\",\"fareBasisInfos\":[{\"airline\":\"MU\",\"arrival\":\"SEL\",\"departure\":\"SHA\",\"direction\":\"TVL\",\"fareBasis\":\"JSE0WCN7\",\"fareType\":\"PUBLIC\",\"passengerType\":\"ADT\",\"referenceOne\":\"key(RuleTariff::Rule::OWRT::Routing::Footnote1::Footnote2::PassengerType::FareType::OriginAddonTariff::OriginAddonFootnote1::OriginAddonFootnote2::DestinationAddonTariff::DestinationAddonFootnote1::DestinationAddonFootnote2::TravelAgencyCode::IataNumber::DepartmentCode::Origin::Destination::FareSource::FbrBaseTariff::FbrBaseRule::AccountCode::FbrBaseFareBasis::OriginAddonRouting::DestinationAddonRouting::R3c025TblNo)\",\"referenceTwo\":\"008::CKR1::1::0030::6B::::ADT::BR ::::::::::::::SZV122::08318995::::SHA::SEL::ATPCO::::::::::::::\"}],\"flightSegments\":[{\"aircode\":\"MU\",\"arrival\":\"ICN\",\"arrivalCityCode\":\"SEL\",\"arrivalDate\":\"2022-08-19T13:55:00\",\"bag\":{\"allowedPieces\":\"2\",\"allowedWeight\":\"\"},\"cabin\":\"J\",\"cabinClass\":\"C\",\"departure\":\"PVG\",\"departureCityCode\":\"SHA\",\"departureDate\":\"2022-08-19T10:50:00\",\"equipType\":\"77W\",\"flightNumber\":\"5041\",\"flightShare\":false,\"isMainSegment\":true,\"operatingFlightNumber\":\"MU5041\",\"orgiDestSeqID\":1,\"segmentSeqID\":1,\"stopTime\":0}],\"iataNo\":\"08318995\",\"isCHDChanged\":\"false\",\"isFareChanged\":\"false\",\"isINFChanged\":\"false\",\"isNoFare\":\"false\",\"isQChanged\":\"false\",\"isTaxChanged\":\"false\",\"merchantId\":\"64\",\"miss\":65792,\"msgId\":\"AC1A436100002A9F00002A343286A6B3\",\"passengerQuantityInfos\":[{\"passengerQuantity\":1,\"passengerType\":\"ADT\"}],\"pcc\":\"SZV122\",\"policyIds\":[\"010000646863174551138422784\"],\"priceInfos\":[{\"baseFare\":{\"currencyCode\":\"CNY\",\"exPrice\":\"5730\",\"nowPrice\":\"5730\"},\"fareBasisCodes\":[\"JSE0WCN7\"],\"fareBasisInfoBOList\":[{\"airline\":\"MU\",\"cat192535\":\"\",\"cat25\":\"\",\"fareBasis\":\"JSE0WCN7\",\"farePtcType\":\"ADT\",\"fareRule\":\"CKR1\",\"fareType\":\"BR \",\"gi\":\"EH\",\"orgDestSeqID\":1,\"segIndex\":0,\"tariff\":\"008\"}],\"fareRules\":[\"CKR1\"],\"fareTypes\":[\"BR \"],\"passengerType\":\"ADT\",\"priceType\":\"PUBLIC\",\"q\":{\"currencyCode\":\"CNY\",\"exQ\":\"0\",\"nowQ\":\"0\"},\"tariffs\":[\"008\"],\"tax\":{\"currencyCode\":\"CNY\",\"exTax\":\"477.00\",\"nowTax\":\"477\"},\"taxes\":[{\"amount\":\"90\",\"currencyCode\":\"CNY\",\"taxCode\":\"CN\"},{\"amount\":\"360\",\"currencyCode\":\"CNY\",\"taxCode\":\"YQ\"},{\"amount\":\"27\",\"currencyCode\":\"CNY\",\"taxCode\":\"YQ\"}],\"tourcode\":\"\"}],\"refId\":\"183638085580386304\",\"resultStatus\":\"4\",\"sourceTag\":\"Engine\",\"ticketCarrier\":\"MU\",\"ticketLocation\":\"SZV\",\"traceId\":\"AP20220622174920QXH7UDZO6DVT7BCYTNKI3QWFCHIG2UTFUSNIIP218ZGNZBP1\",\"tripType\":\"OW\",\"unitKey\":\"X1T/V3/IBE/1~H4sIAAAAAAAAACWMwQ6DMAxDP8Y95pC0UMoRukoVGyDBEOLCl/TjSbdYliwnLyzeW2YWewumPfEZlw7jhvkAc0B8b6LBMfyIC3seaE8fmg9KmfSA6o7IOGODBMt90/S2a4P0jWNj4JAy6rBaaYU1/tV2+na556PE5SrD64vqX6sqjAkRUsF7Pct6aitFHqbb9ZiyAAAA~A8458DF557E9AEEC26F0D1D41488C22C\",\"unitKeyEntityDTO\":{\"fareMetaInfo\":{\"dataVersion\":\"0166200012\"},\"fares\":[{\"carrier\":\"MU\",\"direction\":1,\"discount\":false,\"fareBasis\":\"JSE0WCN7\",\"fareGenType\":\"0\",\"fareItinerary\":\"SHASEL\",\"fareRecordId\":\"SHA,SEL,MU,EH,008,0030,,$3$2818209449275819430$$\",\"fareType\":\"BR\",\"fcIndexInJr\":0,\"fcIndexInPu\":0,\"flightSegIndexes\":[0],\"footnote\":\"6B\",\"gi\":\"EH\",\"isPub\":true,\"owrt\":3,\"puIndexInJr\":0,\"rtgNo\":\"0030\",\"ruleNo\":\"CKR1\",\"saleAmount\":5730,\"tariff\":\"008\"}],\"jrInfo\":{\"fcTotal\":1,\"jrType\":\"OW\",\"puInfos\":[{\"fcCount\":1,\"puIndex\":0,\"puType\":\"OW\"}]},\"quotationInfo\":{\"currency\":\"CNY\",\"passengerPrices\":[{\"fsdPrice\":5730,\"lvlPrice\":0,\"passengerType\":\"ADT\",\"ptcQualification\":\"ADT\",\"surcharge\":0}],\"tickingCarrier\":\"MU\"}},\"validateGds\":\"1E\"}";
+        byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
+        byte[] compress = Zstd.compress(bytes);
+        String s = Base64.getEncoder().encodeToString(compress);
+        System.out.println(bytes.length + "/" + compress.length + "/" + s.getBytes(StandardCharsets.UTF_8).length);
+
+        T t = new T();
+        Map<String, String> map = Maps.newConcurrentMap();
+        t.setMap(map);
+
+        map.put("B", "bbb");
+        map.put("A", "a");
+        t1(map);
+        System.out.println(map);
+    }
+
+    public void t1(Map<String, String> map) {
+        map.put("A", "aaa");
+    }
+
+    @Test
+    public void test4() {
+
+        Comparator<Double> comparator = Comparator.reverseOrder();
+        Map<Double, Integer> distanceMap = Maps.newTreeMap(comparator);
+
+        distanceMap.put(22D, 1);
+        distanceMap.put(33D, 1);
+        distanceMap.put(24D, 1);
+        distanceMap.put(2434D, 1);
+        distanceMap.put(233D, 1);
+        distanceMap.put(2D, 1);
+        distanceMap.put(1D, 1);
+
+        System.out.println(distanceMap);
+
+        Set<String> countryCodeSet = com.google.common.collect.Sets.newHashSet();
+
+        countryCodeSet.add("US");
+
+        boolean us = countryCodeSet.contains("US");
+        System.out.println(us);
+
+        System.out.println(countryCodeSet.toString());
+
+        BitSet bs = new BitSet();
+        bs.set(0, 8);
+        System.out.println(bs);
+
+        System.out.println();
+
+        String str = "//02/0GO";
+        int len = str.length();
+        System.out.println(str.charAt(0));
+        System.out.println(str.charAt(1));
+        System.out.println(str.charAt(len - 4));
+        System.out.println(str.substring(len - 3));
+    }
 
     @Test
     public void test3() {
@@ -135,9 +221,7 @@ public class MyTest {
             ch = s.charAt(1);
             if (ch == 'Q' || ch == 'R') {
                 ch = s.charAt(2);
-                if (ch == 'I' || ch == 'F') {
-                    return true;
-                }
+                return ch == 'I' || ch == 'F';
             }
         }
         return false;

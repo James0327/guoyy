@@ -13,5 +13,5 @@ package com.jw.james.fsm;
 public enum Status {
     UNPAID,
     WAITING_RECEIVE,
-    DONE;
+    DONE
 }

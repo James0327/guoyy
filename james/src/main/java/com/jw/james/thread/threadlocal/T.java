@@ -27,7 +27,7 @@ public class T {
     /**
      * 需要注意的是，使用TTL的时候，要想传递的值不出问题，线程池必须得用TTL加一层代理（下面会讲这样做的目的）
      */
-    private static ExecutorService executorService = TtlExecutors
+    private static final ExecutorService executorService = TtlExecutors
             .getTtlExecutorService(new ThreadPoolExecutor(2, 8, 60, TimeUnit.SECONDS,
                     new LinkedBlockingQueue<>(1024),
                     new BasicThreadFactory.Builder().namingPattern("Thread T %d").build(),

@@ -43,9 +43,9 @@ public class SkipList {
     private static final int MAX_LEVEL = 16;
     private int levelCount = 1;
 
-    private Node head = new Node();
+    private final Node head = new Node();
 
-    private Random r = new Random();
+    private final Random r = new Random();
 
     public void insert(int value) {
         int level = randomLevel();
@@ -135,7 +135,7 @@ public class SkipList {
 
     private class Node {
         private int data = -1;
-        private Node[] forwards = new Node[MAX_LEVEL];
+        private final Node[] forwards = new Node[MAX_LEVEL];
         private int maxLevel = 0;
 
         @Override

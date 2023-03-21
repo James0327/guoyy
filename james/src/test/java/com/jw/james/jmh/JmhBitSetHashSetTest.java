@@ -113,7 +113,7 @@ public class JmhBitSetHashSetTest {
 
     @Param({"1000000", "10000000"})
     private int len;
-    private List<String> vals = Lists.newArrayList();
+    private final List<String> vals = Lists.newArrayList();
 
     @Setup
     public void init() {

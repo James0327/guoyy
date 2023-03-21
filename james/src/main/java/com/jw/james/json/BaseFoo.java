@@ -14,6 +14,6 @@ import lombok.Data;
  */
 @Data
 public class BaseFoo {
-    private Integer id ;
-    private String remark ;
+    private Integer id;
+    private String remark;
 }

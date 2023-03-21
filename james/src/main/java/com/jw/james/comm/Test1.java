@@ -21,38 +21,6 @@ import java.util.TimeZone;
  */
 public class Test1 {
 
-    static class BitSetExt {
-        private Long maxId = 0x3FFFFFFFFFFFFFFFL;
-
-        private BitSet lh = new BitSet();
-        private BitSet ll = new BitSet();
-        private BitSet i = new BitSet();
-
-        public void set(long num) {
-            if (num <= Integer.MAX_VALUE) {
-                boolean b = i.get((int)num);
-                System.out.println(b);
-            }
-            if (num > maxId) {
-                return;
-            }
-            int n1 = (int)(num >> 31);
-            int n2 = (int)(num & 0x7FFFFFFF);
-            System.out.println(n1 + "][" + Integer.toBinaryString(n1));
-            System.out.println(n2 + "][" + Integer.toBinaryString(n2));
-
-            System.out.println(lh.get(n1));
-            System.out.println(ll.get(n2));
-
-            lh.set(n1);
-            ll.set(n2);
-
-            System.out.println("---------");
-            System.out.println(lh.get(n1));
-            System.out.println(ll.get(n2));
-        }
-    }
-
     public static void main(String[] args) {
         BitSetExt bitSetExt = new BitSetExt();
         bitSetExt.set(0x3FFFFFFFFFFFFFFFL);
@@ -116,6 +84,38 @@ public class Test1 {
 
         System.out.println(JSON.toJSONString(list));
 
+    }
+
+    static class BitSetExt {
+        private final Long maxId = 0x3FFFFFFFFFFFFFFFL;
+
+        private final BitSet lh = new BitSet();
+        private final BitSet ll = new BitSet();
+        private final BitSet i = new BitSet();
+
+        public void set(long num) {
+            if (num <= Integer.MAX_VALUE) {
+                boolean b = i.get((int)num);
+                System.out.println(b);
+            }
+            if (num > maxId) {
+                return;
+            }
+            int n1 = (int)(num >> 31);
+            int n2 = (int)(num & 0x7FFFFFFF);
+            System.out.println(n1 + "][" + Integer.toBinaryString(n1));
+            System.out.println(n2 + "][" + Integer.toBinaryString(n2));
+
+            System.out.println(lh.get(n1));
+            System.out.println(ll.get(n2));
+
+            lh.set(n1);
+            ll.set(n2);
+
+            System.out.println("---------");
+            System.out.println(lh.get(n1));
+            System.out.println(ll.get(n2));
+        }
     }
 
 }

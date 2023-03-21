@@ -60,27 +60,26 @@ public class Contraction {
     public static String string2HexString(String strPart) {
         StringBuffer hexString = new StringBuffer();
         for (int i = 0; i < strPart.length(); i++) {
-            int ch = (int)strPart.charAt(i);
+            int ch = strPart.charAt(i);
             String strHex = Integer.toHexString(ch);
             hexString.append(strHex);
         }
         return hexString.toString();
     }
 
-    /**
-     * 十六进制转字节数组
-     *
-     * @param src
-     * @return
-     */
-    public static byte[] hexString2Bytes(String src) {
-        int l = src.length() / 2;
-        byte[] ret = new byte[l];
-        for (int i = 0; i < l; i++) {
-            ret[i] = (byte)Integer
-                    .valueOf(src.substring(i * 2, i * 2 + 2), 16).byteValue();
+    public static String compactString(String str) {
+        StringBuffer buffer = new StringBuffer();
+        byte[] bytes = str.getBytes();
+        for (int i = 0, len = bytes.length; i < len; i += 2) {
+            char firstCharacter = (char)bytes[i];
+            char secondCharacter = 0;
+            if (i + 1 < len) {
+                secondCharacter = (char)bytes[i + 1];
+            }
+            firstCharacter <<= 8;
+            buffer.append((char)(firstCharacter + secondCharacter));
         }
-        return ret;
+        return buffer.toString();
     }
 
     public static String decompressionString(String str) {
@@ -99,19 +98,20 @@ public class Contraction {
         return buffer.toString();
     }
 
-    public static String compactString(String str) {
-        StringBuffer buffer = new StringBuffer();
-        byte[] bytes = str.getBytes();
-        for (int i = 0, len = bytes.length; i < len; i += 2) {
-            char firstCharacter = (char)bytes[i];
-            char secondCharacter = 0;
-            if (i + 1 < len) {
-                secondCharacter = (char)bytes[i + 1];
-            }
-            firstCharacter <<= 8;
-            buffer.append((char)(firstCharacter + secondCharacter));
+    /**
+     * 十六进制转字节数组
+     *
+     * @param src
+     * @return
+     */
+    public static byte[] hexString2Bytes(String src) {
+        int l = src.length() / 2;
+        byte[] ret = new byte[l];
+        for (int i = 0; i < l; i++) {
+            ret[i] = Integer
+                    .valueOf(src.substring(i * 2, i * 2 + 2), 16).byteValue();
         }
-        return buffer.toString();
+        return ret;
     }
 
 }

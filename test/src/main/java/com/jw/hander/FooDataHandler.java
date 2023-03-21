@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * <p>
  * Copyright (C) 2021 JW All rights reserved.
  */
-//@TableFileType({FileTypeEnum.FOO, FileTypeEnum.YQYR})
+@TableFileType({FileTypeEnum.FOO, FileTypeEnum.YQYR})
 @Component
 public class FooDataHandler implements DataLoadHandler {
 

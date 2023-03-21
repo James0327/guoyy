@@ -13,8 +13,11 @@ import java.util.concurrent.Semaphore;
  * Copyright (C) 2020 JW All rights reserved.
  */
 public class Foo2 {
-    private Semaphore s2 = new Semaphore(0);
-    private Semaphore s3 = new Semaphore(0);
+    private final Semaphore s2 = new Semaphore(0);
+    private final Semaphore s3 = new Semaphore(0);
+
+    public Foo2() {
+    }
 
     public static void main(String[] args) {
         Foo2 foo = new Foo2();
@@ -23,12 +26,13 @@ public class Foo2 {
         new Thread(() -> foo.one()).start();
     }
 
-    public Foo2() {
-    }
-
-    public void one() {
-        System.out.println("one");
-        s2.release();
+    public void three() {
+        try {
+            s3.acquire();
+            System.out.println("three");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void two() {
@@ -41,12 +45,8 @@ public class Foo2 {
         }
     }
 
-    public void three() {
-        try {
-            s3.acquire();
-            System.out.println("three");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void one() {
+        System.out.println("one");
+        s2.release();
     }
 }

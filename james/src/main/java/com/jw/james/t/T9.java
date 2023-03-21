@@ -23,19 +23,6 @@ import java.util.regex.Pattern;
  */
 public class T9 {
 
-    @Test
-    public void test() {
-        int i = 1;
-        int j = ~i;
-
-        System.out.println(Integer.toBinaryString(i));
-        System.out.println(Integer.toBinaryString(j));
-        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
-
-        boolean flag = (i & j) == 0;
-        System.out.println(flag);
-    }
-
     public static void main(String[] args) {
         Map<String, String> map = Maps.newHashMap();
 
@@ -169,5 +156,18 @@ public class T9 {
         s = StringUtils.splitByWholeSeparator(str, "__");
         System.out.println("2:" + JSON.toJSONString(s));
 
+    }
+
+    @Test
+    public void test() {
+        int i = 1;
+        int j = ~i;
+
+        System.out.println(Integer.toBinaryString(i));
+        System.out.println(Integer.toBinaryString(j));
+        System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+
+        boolean flag = (i & j) == 0;
+        System.out.println(flag);
     }
 }

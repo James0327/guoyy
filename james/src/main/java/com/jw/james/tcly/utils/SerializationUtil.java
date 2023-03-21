@@ -13,48 +13,48 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SerializationUtil {
 
-	private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<>();
+    private static final Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<>();
 
-	private static Objenesis objenesis = new ObjenesisStd(true);
+    private static final Objenesis objenesis = new ObjenesisStd(true);
 
-	private SerializationUtil() {
-	}
+    private SerializationUtil() {
+    }
 
-	@SuppressWarnings("unchecked")
-	private static <T> Schema<T> getSchema(Class<T> cls) {
-		Schema<T> schema = (Schema<T>) cachedSchema.get(cls);
-		if (schema == null) {
-			schema = RuntimeSchema.createFrom(cls);
-			if (schema != null) {
-				cachedSchema.put(cls, schema);
-			}
-		}
-		return schema;
-	}
+    @SuppressWarnings("unchecked")
+    public static <T> String serialize(T obj) {
+        Class<T> cls = (Class<T>)obj.getClass();
+        LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+        try {
+            Schema<T> schema = getSchema(cls);
+            return Base64.getEncoder().encodeToString(ProtostuffIOUtil.toByteArray(obj, schema, buffer));
+        } catch (Exception e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        } finally {
+            buffer.clear();
+        }
+    }
 
-	@SuppressWarnings("unchecked")
-	public static <T> String serialize(T obj) {
-		Class<T> cls = (Class<T>) obj.getClass();
-		LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
-		try {
-			Schema<T> schema = getSchema(cls);
-			return Base64.getEncoder().encodeToString(ProtostuffIOUtil.toByteArray(obj, schema, buffer));
-		} catch (Exception e) {
-			throw new IllegalStateException(e.getMessage(), e);
-		} finally {
-			buffer.clear();
-		}
-	}
+    @SuppressWarnings("unchecked")
+    private static <T> Schema<T> getSchema(Class<T> cls) {
+        Schema<T> schema = (Schema<T>)cachedSchema.get(cls);
+        if (schema == null) {
+            schema = RuntimeSchema.createFrom(cls);
+            if (schema != null) {
+                cachedSchema.put(cls, schema);
+            }
+        }
+        return schema;
+    }
 
-	public static <T> T deserialize(String param, Class<T> cls) {
-		try {
-			T message = (T) objenesis.newInstance(cls);
-			Schema<T> schema = getSchema(cls);
-			byte[] data = Base64.getDecoder().decode(param);
-			ProtostuffIOUtil.mergeFrom(data, message, schema);
-			return message;
-		} catch (Exception e) {
-			throw new IllegalStateException(e.getMessage(), e);
-		}
-	}
+    public static <T> T deserialize(String param, Class<T> cls) {
+        try {
+            T message = objenesis.newInstance(cls);
+            Schema<T> schema = getSchema(cls);
+            byte[] data = Base64.getDecoder().decode(param);
+            ProtostuffIOUtil.mergeFrom(data, message, schema);
+            return message;
+        } catch (Exception e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
 }

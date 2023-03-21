@@ -32,9 +32,9 @@ public class BitSetExt {
         }
     }
 
-    private BitSet lh = new BitSet();
-    private BitSet ll = new BitSet();
-    private BitSet i = new BitSet();
+    private final BitSet lh = new BitSet();
+    private final BitSet ll = new BitSet();
+    private final BitSet i = new BitSet();
 
     public void set(long num) {
         if (num <= Integer.MAX_VALUE) {

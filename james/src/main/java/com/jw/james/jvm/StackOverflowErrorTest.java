@@ -16,11 +16,6 @@ public class StackOverflowErrorTest {
 
     private int depth = 0;
 
-    private void sofM() {
-        depth++;
-        sofM();
-    }
-
     /**
      * 栈空间不足时，需要分下面两种情况处理：
      * 线程请求的栈深度大于虚拟机所允许的最大深度，将抛出StackOverflowError
@@ -37,6 +32,11 @@ public class StackOverflowErrorTest {
             System.out.println("递归次数：" + stackOverflowErrorTest.depth);
             LockSupport.park();
         }
+    }
+
+    private void sofM() {
+        depth++;
+        sofM();
     }
 
 }

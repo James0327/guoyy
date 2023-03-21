@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    public abstract int insert(UserDO userDO);
+    int insert(UserDO userDO);
 
     int update(UserDO userDO);
 

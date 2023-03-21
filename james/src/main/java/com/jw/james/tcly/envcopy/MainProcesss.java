@@ -62,60 +62,6 @@ public class MainProcesss {
         System.out.println(retList);
     }
 
-    private void filter(Map<String, Node> map) {
-        String apps = "iflight.java.dsf.inter.isav,iflight.java.dsf.inter.isavdownloader,iflight.java.web.inter.isavmanager";
-        String[] appArr = StringUtils.split(apps, ",");
-
-        Iterator<Map.Entry<String, Node>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, Node> entry = iterator.next();
-            String id = entry.getKey();
-            if (!ArrayUtils.contains(appArr, id)) {
-                iterator.remove();
-                Node node = entry.getValue();
-                Set<String> parent = node.getParent();
-                for (String key : parent) {
-                    map.get(key).getChriden().remove(id);
-                }
-                Set<String> chriden = node.getChriden();
-                for (String key : chriden) {
-                    map.get(key).getParent().remove(id);
-                }
-            }
-        }
-    }
-
-    private Set<String> calLevel(Map<String, Node> map) {
-        Set<String> ret = Sets.newHashSet();
-
-        boolean hasLeaf = false;
-
-        Iterator<Map.Entry<String, Node>> iterator = map.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, Node> entry = iterator.next();
-            Node node = entry.getValue();
-            if (CollectionUtils.isEmpty(node.getChriden())) {
-                iterator.remove();
-                if (!hasLeaf) {
-                    hasLeaf = true;
-                }
-                String id = entry.getKey();
-                ret.add(id);
-                Set<String> parent = node.getParent();
-                for (String key : parent) {
-                    map.get(key).getChriden().remove(id);
-                }
-            }
-        }
-
-        if (hasLeaf) {
-            return ret;
-        }
-        ret = map.values().stream().map(Node::getId).collect(Collectors.toSet());
-        map.clear();
-        return ret;
-    }
-
     private String getJson() {
         return "{\n" +
                 "    \"code\": 200,\n" +
@@ -207,6 +153,60 @@ public class MainProcesss {
                 "        }\n" +
                 "    ]\n" +
                 "}";
+    }
+
+    private void filter(Map<String, Node> map) {
+        String apps = "iflight.java.dsf.inter.isav,iflight.java.dsf.inter.isavdownloader,iflight.java.web.inter.isavmanager";
+        String[] appArr = StringUtils.split(apps, ",");
+
+        Iterator<Map.Entry<String, Node>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Node> entry = iterator.next();
+            String id = entry.getKey();
+            if (!ArrayUtils.contains(appArr, id)) {
+                iterator.remove();
+                Node node = entry.getValue();
+                Set<String> parent = node.getParent();
+                for (String key : parent) {
+                    map.get(key).getChriden().remove(id);
+                }
+                Set<String> chriden = node.getChriden();
+                for (String key : chriden) {
+                    map.get(key).getParent().remove(id);
+                }
+            }
+        }
+    }
+
+    private Set<String> calLevel(Map<String, Node> map) {
+        Set<String> ret = Sets.newHashSet();
+
+        boolean hasLeaf = false;
+
+        Iterator<Map.Entry<String, Node>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, Node> entry = iterator.next();
+            Node node = entry.getValue();
+            if (CollectionUtils.isEmpty(node.getChriden())) {
+                iterator.remove();
+                if (!hasLeaf) {
+                    hasLeaf = true;
+                }
+                String id = entry.getKey();
+                ret.add(id);
+                Set<String> parent = node.getParent();
+                for (String key : parent) {
+                    map.get(key).getChriden().remove(id);
+                }
+            }
+        }
+
+        if (hasLeaf) {
+            return ret;
+        }
+        ret = map.values().stream().map(Node::getId).collect(Collectors.toSet());
+        map.clear();
+        return ret;
     }
 
 }

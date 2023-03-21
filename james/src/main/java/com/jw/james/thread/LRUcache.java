@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.LongAdder;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class LRUcache {
-	private volatile int[] vals;
+	private final int[] vals;
 	private final int size;
 	private final AtomicInteger offset = new AtomicInteger();
 

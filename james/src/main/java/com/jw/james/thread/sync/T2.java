@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * @Description: test T2
+ * @Description: test T_v2
  * @Package: com.jw.thread.sync
- * @ClassName: T2
+ * @ClassName: T_v2
  * @Author: james.guo
  * @Date: 2019/10/30 10:36
  * @Version: 1.0
@@ -32,7 +32,7 @@ public class T2 {
 		final LocalDateTime start = LocalDateTime.now();
 
 		int cpu = Runtime.getRuntime().availableProcessors();
-		BasicThreadFactory threadFactory = new BasicThreadFactory.Builder().namingPattern("T2-%d").build();
+		BasicThreadFactory threadFactory = new BasicThreadFactory.Builder().namingPattern("T_v2-%d").build();
 		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(10 * cpu, 30 * cpu, 6, TimeUnit.SECONDS, new LinkedBlockingQueue<>(500 * cpu), threadFactory, new ThreadPoolExecutor.AbortPolicy());
 
 		List<Integer> list = IntStream.range(1, 30).boxed().collect(Collectors.toList());

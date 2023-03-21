@@ -12,8 +12,8 @@ public enum FileTypeEnum {
     // 运价
     G16("G16", "G16");
 
-    private String key;
-    private String desc;
+    private final String key;
+    private final String desc;
 
     /**
      * @param key
@@ -24,14 +24,6 @@ public enum FileTypeEnum {
         this.desc = desc;
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
     public static boolean isTaxfeeFile(String fileTypeKey) {
         if (StringUtils.isNotEmpty(fileTypeKey)) {
             if (YQYR.key.equals(fileTypeKey)) {
@@ -40,19 +32,23 @@ public enum FileTypeEnum {
             if (FPP.key.equals(fileTypeKey)) {
                 return true;
             }
-            if (XTAX.key.equals(fileTypeKey)) {
-                return true;
-            }
+            return XTAX.key.equals(fileTypeKey);
         }
         return false;
     }
 
     public static boolean isG16File(String fileTypeKey) {
         if (StringUtils.isNotEmpty(fileTypeKey)) {
-            if (G16.key.equals(fileTypeKey)) {
-                return true;
-            }
+            return G16.key.equals(fileTypeKey);
         }
         return false;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 }

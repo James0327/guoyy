@@ -1,7 +1,7 @@
 package com.jw.james.tcly.mybatis.dao;
 
-import com.jw.james.tcly.mybatis.dto.BaseObject;
 import com.jw.james.tcly.mybatis.DAOException;
+import com.jw.james.tcly.mybatis.dto.BaseObject;
 
 import java.util.List;
 

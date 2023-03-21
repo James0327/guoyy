@@ -11,8 +11,8 @@ package com.jw.james.tcly.proxy;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class Dog {
-	public String call() {
-		System.out.println("wang wang wang");
-		return "Dog...";
-	}
+    public String call() {
+        System.out.println("wang wang wang");
+        return "Dog...";
+    }
 }

@@ -30,10 +30,6 @@ public class Lz4Util {
         decompressor = factory.fastDecompressor();
     }
 
-    private static class Singlon {
-        private static final Lz4Util INSTANCE = new Lz4Util();
-    }
-
     public static Lz4Util instance() {
         return Singlon.INSTANCE;
     }
@@ -73,6 +69,10 @@ public class Lz4Util {
             os.close();
         }
         return os.toByteArray();
+    }
+
+    private static class Singlon {
+        private static final Lz4Util INSTANCE = new Lz4Util();
     }
 
 }

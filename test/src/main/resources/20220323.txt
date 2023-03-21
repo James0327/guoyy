@@ -1,0 +1,7 @@
+comm -> aaa;
+aaa -> cnd;
+cnd -> mmd;
+aaa -> edv;
+ddd -> mdc;
+ddd -> abc;
+abc -> comm;

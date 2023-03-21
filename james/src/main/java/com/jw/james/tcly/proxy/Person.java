@@ -11,9 +11,9 @@ package com.jw.james.tcly.proxy;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public interface Person {
-	void goWorking(String name, String dst);
+    void goWorking(String name, String dst);
 
-	String getName();
+    String getName();
 
-	void setName(String name);
+    void setName(String name);
 }

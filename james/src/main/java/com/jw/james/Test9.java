@@ -1,6 +1,8 @@
 package com.jw.james;
 
 import com.jw.james.dto.Foo;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.Test;
 import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
@@ -27,12 +29,25 @@ import java.util.concurrent.TimeUnit;
  */
 public class Test9 {
 
+    @Test
+    public void test6() {
+        String flightNo = "AA889";
+        String ret = StringUtils.substring(flightNo, 0, 2) + StringUtils.leftPad(StringUtils.substring(flightNo, 2), 4);
+        System.out.println(ret);
+
+        String str = "BJSHKG";
+        String dep = StringUtils.substring(str, 0, 3);
+        String arr = StringUtils.substring(str, 3);
+
+        System.out.println(dep + "][" + arr);
+    }
+
     public static void main(String[] args) {
 
         List<Foo> fareParameterList = Collections.nCopies(4, null);
-        Foo  obj = new Foo();
+        Foo obj = new Foo();
         obj.setId(1L);
-        fareParameterList.set(2, obj );
+        fareParameterList.set(2, obj);
 
         Iterator<Foo> iterator = fareParameterList.iterator();
         while (iterator.hasNext()) {
@@ -41,8 +56,6 @@ public class Test9 {
             }
         }
         //        fareParameterList.listIterator();
-
-
 
         SpelExpressionParser parser = new SpelExpressionParser();
         Expression expression = parser.parseExpression("#root.remark");

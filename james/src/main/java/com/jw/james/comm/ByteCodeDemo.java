@@ -11,7 +11,7 @@ package com.jw.james.comm;
  * Copyright (C) 2019 JW All rights reserved.
  */
 public class ByteCodeDemo {
-    private int a = 1;
+    private final int a = 1;
 
     public int add() {
         int b = 2;

@@ -11,8 +11,11 @@ package com.jw.james.t;
  * Copyright (C) 2020 JW All rights reserved.
  */
 public class Foo3 {
-    private Object lock2 = new Object();
-    private Object lock3 = new Object();
+    private final Object lock2 = new Object();
+    private final Object lock3 = new Object();
+
+    public Foo3() {
+    }
 
     public static void main(String[] args) {
         Foo3 foo = new Foo3();
@@ -21,13 +24,14 @@ public class Foo3 {
         new Thread(() -> foo.one()).start();
     }
 
-    public Foo3() {
-    }
-
-    public void one() {
-        System.out.println("one");
-        synchronized (this) {
-            lock2.notifyAll();
+    public void three() {
+        try {
+            synchronized (this) {
+                lock3.wait();
+            }
+            System.out.println("three");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -45,14 +49,10 @@ public class Foo3 {
         }
     }
 
-    public void three() {
-        try {
-            synchronized (this) {
-                lock3.wait();
-            }
-            System.out.println("three");
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void one() {
+        System.out.println("one");
+        synchronized (this) {
+            lock2.notifyAll();
         }
     }
 }

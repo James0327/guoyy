@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class LRUCache0<K, V> {
 
-    private LinkedList<K> orderKey = new LinkedList<>();
-    private Map<K, V> cache = new HashMap<>();
+    private final LinkedList<K> orderKey = new LinkedList<>();
+    private final Map<K, V> cache = new HashMap<>();
 
     private int capacity = -1;
 
@@ -30,9 +30,7 @@ public class LRUCache0<K, V> {
             K k1 = orderKey.removeFirst();
             cache.remove(k1);
         }
-        if (orderKey.contains(k)) {
-            orderKey.remove(k);
-        }
+        orderKey.remove(k);
         orderKey.addLast(k);
         cache.put(k, v);
         return v;
@@ -49,7 +47,7 @@ public class LRUCache0<K, V> {
     }
 
     public interface Callback<V> {
-        public abstract V load();
+        V load();
     }
 
 }
