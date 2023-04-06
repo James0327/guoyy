@@ -1,4 +1,4 @@
-package com.jw.james.hbase.conf;
+package com.jw.hbase.conf;
 
 import lombok.Getter;
 import lombok.Setter;

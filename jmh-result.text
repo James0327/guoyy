@@ -1,0 +1,5 @@
+Benchmark                    (num)  Mode  Cnt         Score   Error  Units
+JmhThreadTest.forkJoinPool       7  avgt    2  48106039.870          ns/op
+JmhThreadTest.forkJoinPool      30  avgt    2  43882877.318          ns/op
+JmhThreadTest.forkJoinPool0      7  avgt    2   7576875.414          ns/op
+JmhThreadTest.forkJoinPool0     30  avgt    2   7631029.747          ns/op

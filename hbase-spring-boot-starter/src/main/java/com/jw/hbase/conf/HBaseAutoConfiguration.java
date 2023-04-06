@@ -1,6 +1,6 @@
-package com.jw.james.hbase.conf;
+package com.jw.hbase.conf;
 
-import com.jw.james.hbase.service.HBaseService;
+import com.jw.hbase.service.HBaseService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

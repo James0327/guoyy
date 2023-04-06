@@ -1,7 +1,7 @@
-package com.jw.james.hbase.service;
+package com.jw.hbase.service;
 
 import com.alibaba.fastjson.JSON;
-import com.jw.james.hbase.conf.HBaseConf;
+import com.jw.hbase.conf.HBaseConf;
 
 /**
  * guoyy com.jw.hbase.service
